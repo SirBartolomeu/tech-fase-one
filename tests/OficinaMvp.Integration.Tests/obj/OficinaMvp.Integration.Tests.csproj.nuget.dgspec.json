@@ -13,8 +13,14 @@
         "packagesPath": "C:\\Users\\AAMJOF\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\AAMJOF\\Desktop\\FIAP\\Tech-Challenge-1\\oficina-mvp\\src\\OficinaMvp.Api\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\AAMJOF\\Desktop\\FIAP\\Tech-Challenge-1\\oficina-mvp\\security-report\\temp\\NuGet.scan.config"
+          "C:\\Users\\AAMJOF\\Desktop\\FIAP\\Tech-Challenge-1\\oficina-mvp\\NuGet.Config",
+          "C:\\Users\\AAMJOF\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -97,8 +103,14 @@
         "packagesPath": "C:\\Users\\AAMJOF\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\AAMJOF\\Desktop\\FIAP\\Tech-Challenge-1\\oficina-mvp\\tests\\OficinaMvp.Integration.Tests\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\AAMJOF\\Desktop\\FIAP\\Tech-Challenge-1\\oficina-mvp\\security-report\\temp\\NuGet.scan.config"
+          "C:\\Users\\AAMJOF\\Desktop\\FIAP\\Tech-Challenge-1\\oficina-mvp\\NuGet.Config",
+          "C:\\Users\\AAMJOF\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"

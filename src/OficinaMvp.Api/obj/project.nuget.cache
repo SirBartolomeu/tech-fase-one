@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "JhvhF0ZkIUI=",
+  "dgSpecHash": "BPfqacNmKz8=",
   "success": true,
   "projectFilePath": "C:\\Users\\AAMJOF\\Desktop\\FIAP\\Tech-Challenge-1\\oficina-mvp\\src\\OficinaMvp.Api\\OficinaMvp.Api.csproj",
   "expectedPackageFiles": [
@@ -42,5 +42,15 @@
     "C:\\Users\\AAMJOF\\.nuget\\packages\\system.identitymodel.tokens.jwt\\7.1.2\\system.identitymodel.tokens.jwt.7.1.2.nupkg.sha512",
     "C:\\Users\\AAMJOF\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1900",
+      "level": "Warning",
+      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json.",
+      "projectPath": "C:\\Users\\AAMJOF\\Desktop\\FIAP\\Tech-Challenge-1\\oficina-mvp\\src\\OficinaMvp.Api\\OficinaMvp.Api.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\AAMJOF\\Desktop\\FIAP\\Tech-Challenge-1\\oficina-mvp\\src\\OficinaMvp.Api\\OficinaMvp.Api.csproj",
+      "targetGraphs": []
+    }
+  ]
 }

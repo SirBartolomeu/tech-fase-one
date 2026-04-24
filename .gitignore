@@ -14,6 +14,15 @@ TestResults/
 *.trx
 coverage.cobertura.xml
 
+# Python artifacts
+**/__pycache__/
+*.pyc
+
+# Security report probes/temp artifacts
+security-report/raw/semgrep.manual.json
+security-report/raw/semgrep.probe.json
+security-report/temp/
+
 # Local databases and runtime files
 *.db
 *.db-shm
@@ -22,6 +31,3 @@ coverage.cobertura.xml
 # OS junk
 .DS_Store
 Thumbs.db
-
-# Git
-.git/

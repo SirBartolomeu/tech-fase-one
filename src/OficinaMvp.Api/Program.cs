@@ -100,6 +100,12 @@ using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<WorkshopDbContext>();
     dbContext.Database.EnsureCreated();
+
+    var shouldSeedDemoData = app.Configuration.GetValue<bool?>("SeedDemoData") ?? app.Environment.IsDevelopment();
+    if (shouldSeedDemoData && !app.Environment.IsEnvironment("Testing"))
+    {
+        await WorkshopDemoSeeder.SeedAsync(dbContext, app.Logger);
+    }
 }
 
 app.UseAuthentication();

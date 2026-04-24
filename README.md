@@ -5,7 +5,7 @@ API REST para gestao de oficina mecanica, implementada em `.NET 8` com `C#`, arq
 ## Documentacao DDD do desafio
 
 - Documento principal: `docs/documentacao-ddd-tech-challenge.md`
-- Diagramas visuais gerados:
+- Diagramas visuais:
   - `docs/diagramas/domain-storytelling-oficina-mvp.svg`
   - `docs/diagramas/event-storming-oficina-mvp.svg`
 
@@ -23,20 +23,17 @@ Entregar um MVP com:
 Monolito modular em camadas:
 
 - `Domain`
-  - Entidades centrais: `WorkOrder`, `Customer`, `Vehicle`, `PartSupply`, `RepairService`, `WorkOrderStatusHistory`
+  - Entidades principais: `WorkOrder`, `Customer`, `Vehicle`, `PartSupply`, `RepairService`, `WorkOrderStatusHistory`
   - Regras de negocio e validacoes de dominio (`DocumentValidator`, `LicensePlateValidator`)
-
 - `Application`
   - Orquestracao de casos de uso da OS via `WorkOrderApplicationService`
-  - Contratos de entrada/saida (DTOs) em `Application/Contracts`
-
+  - Contratos de entrada e saida (DTOs) em `Application/Contracts`
 - `Infrastructure`
   - Persistencia com EF Core e `WorkshopDbContext`
   - Seguranca com JWT (`TokenService`, `JwtOptions`, `AdminCredentialsOptions`)
-
 - `Presentation (API)`
   - Controllers REST (`WorkOrdersController`, `CustomersController`, `VehiclesController`, `PartsController`, `ServicesController`, `AuthController`, `ClientTrackingController`)
-  - Middleware global de tratamento de excecoes (`ExceptionHandlingMiddleware`)
+  - Middleware global de excecoes (`ExceptionHandlingMiddleware`)
   - Swagger/OpenAPI para exploracao da API
 
 ## Estrutura de pastas
@@ -65,21 +62,41 @@ oficina-mvp/
 - Testes:
   - `xUnit`
   - `Microsoft.NET.Test.Sdk`
-  - `Microsoft.AspNetCore.Mvc.Testing` (WebApplicationFactory)
-  - `coverlet.collector` (cobertura)
+  - `Microsoft.AspNetCore.Mvc.Testing`
+  - `coverlet.collector`
 
 ## Banco de dados: por que SQLite
 
 `SQLite` foi escolhido para o MVP porque:
 - reduz custo de operacao e setup (arquivo local, sem servidor dedicado)
 - acelera desenvolvimento e validacao funcional
-- integra nativamente com EF Core
+- integra de forma nativa com EF Core
 - facilita execucao local e em container
 
 No projeto atual:
 - ambiente local/compose usa arquivo SQLite (`Data Source=oficina.db` ou `/data/oficina.db`)
 - testes de integracao usam SQLite em memoria (`Data Source=:memory:`) para isolamento e velocidade
 - nao ha pasta de migrations; o schema e criado com `EnsureCreated()`
+- existe seed idempotente de dados de demonstracao para ambiente `Development`
+
+## Seed de demo
+
+A aplicacao inclui seed de dados para facilitar validacao em qualquer maquina:
+- cliente demo
+- veiculo demo
+- servicos demo
+- pecas/insumos demo
+
+Comportamento padrao:
+- roda automaticamente em `Development`
+- nao roda em `Testing`
+
+Para desativar a seed em `Development`:
+
+```powershell
+$env:SeedDemoData = "false"
+dotnet run --project .\src\OficinaMvp.Api --launch-profile http
+```
 
 ## Pre-requisitos
 
@@ -94,24 +111,21 @@ winget install -e --id Docker.DockerDesktop --accept-package-agreements --accept
 
 Se `docker` nao for reconhecido apos instalar:
 - abra nova sessao de terminal
-- ou use o caminho absoluto:
-
-```powershell
-& "C:\Program Files\Docker\Docker\resources\bin\docker.exe" --version
-```
+- valide `docker --version`
+- se necessario, ajuste o `PATH` do Docker Desktop e abra nova sessao
 
 ## Como rodar localmente (sem Docker)
 
 Na raiz `oficina-mvp`:
 
 ```powershell
-dotnet restore .\OficinaMvp.sln --source https://api.nuget.org/v3/index.json
-dotnet run --project .\src\OficinaMvp.Api
+dotnet restore .\OficinaMvp.sln
+dotnet run --project .\src\OficinaMvp.Api --launch-profile http
 ```
 
-Endpoints:
-- API: `http://localhost:5232`
-- Swagger: `http://localhost:5232/swagger`
+Endpoints locais:
+- API: `http://localhost:5245`
+- Swagger: `http://localhost:5245/swagger`
 
 ## Autenticacao
 
@@ -131,12 +145,6 @@ Na raiz `oficina-mvp`:
 
 ```powershell
 docker compose up -d --build
-```
-
-Caso `docker` nao esteja no PATH:
-
-```powershell
-& "C:\Program Files\Docker\Docker\resources\bin\docker.exe" compose up -d --build
 ```
 
 Endpoints em container:
@@ -169,7 +177,7 @@ Validacao de cobertura minima (80%) nos dominios criticos:
 powershell -ExecutionPolicy Bypass -File .\scripts\validate-domain-coverage.ps1 -Minimum 80
 ```
 
-## Relatorio de vulnerabilidades (scan de codigo)
+## Relatorio de vulnerabilidades
 
 Pipeline completo (SCA + SAST + imagem):
 
@@ -186,21 +194,8 @@ Saidas geradas:
 - `security-report/relatorio-vulnerabilidades.pdf`
 
 Observacao:
-- o pipeline falha de forma explicita se qualquer etapa obrigatoria falhar (incluindo scan de imagem).
-- para o scan de imagem funcionar, o Docker daemon precisa estar acessivel (`docker info` sem erro).
-
-## Observacoes de desempenho e gargalos
-
-Diagnostico observado durante execucao:
-- nao ha migrations em execucao
-- nao ha criacao de banco por teste individual
-- a criacao de schema ocorre via `EnsureCreated()` no startup e no setup da factory de integracao
-- testes executados uma unica vez na solucao: `23` testes aprovados
-
-Principais fontes de lentidao percebida:
-- `restore`/auditoria de vulnerabilidades de pacotes em feeds inacessiveis (warnings `NU1900`)
-- acumulacao de processos `dotnet` orfaos apos execucoes interrompidas
-- ambiente Docker sem permissao de acesso ao pipe do daemon
+- o pipeline falha de forma explicita se qualquer etapa obrigatoria falhar (incluindo scan de imagem)
+- para o scan de imagem funcionar, o Docker daemon precisa estar acessivel (`docker info` sem erro)
 
 ## Troubleshooting rapido
 
