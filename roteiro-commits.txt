@@ -1,0 +1,112 @@
+Uma boa sequência para esse projeto seria:
+
+chore: initialize repository metadata
+
+.gitignore
+.gitattributes
+LICENSE
+estrutura inicial do repositório
+chore: create .NET solution structure
+
+solução .sln
+projeto API
+projetos de testes
+estrutura src/ e tests/
+feat(domain): add core workshop domain model
+
+entidades principais: Customer, Vehicle, WorkOrder, RepairService, PartSupply
+enums/status da OS
+regras básicas de domínio
+feat(application): add work order use cases
+
+serviços de aplicação
+fluxo da OS
+validações de transição
+feat(infrastructure): configure SQLite persistence
+
+DbContext
+repositórios
+configuração SQLite
+persistência local
+feat(api): expose administrative endpoints
+
+endpoints de clientes
+veículos
+serviços
+peças/insumos
+feat(api): expose work order lifecycle endpoints
+
+criação de OS
+diagnóstico
+orçamento
+aprovação
+finalização
+entrega
+feat(auth): add JWT authentication
+
+endpoint /api/auth/token
+proteção dos endpoints administrativos
+configuração de credenciais admin
+feat(api): add public client tracking endpoint
+
+endpoint público de consulta da OS por documento
+validação de documento do cliente
+feat(seed): add demo seed data
+
+dados iniciais para facilitar apresentação
+cliente, veículo, serviços e peças de exemplo
+test(domain): add unit tests for critical business rules
+
+transições inválidas
+OS sem item
+estoque insuficiente
+regras de domínio
+test(integration): add authenticated API flow tests
+
+login JWT
+endpoints protegidos
+fluxo completo da OS
+chore(coverage): enforce critical domain coverage threshold
+
+configuração de cobertura mínima
+script/local check se aplicável
+chore(docker): add Dockerfile and docker compose
+
+build da API
+porta 8080
+volume SQLite
+execução reprodutível
+docs: write README with local and docker instructions
+
+como rodar local
+como rodar via Docker
+JWT
+SQLite
+testes
+docs(ddd): add domain documentation and diagrams
+
+Domain Storytelling
+Event Storming
+linguagem ubíqua
+glossário PT -> EN
+chore(security): add vulnerability scan pipeline
+
+SCA NuGet
+Semgrep
+Docker Scout
+geração de relatório
+docs(security): add vulnerability report artifacts
+
+relatório Markdown/PDF
+evidências JSON, se você decidir versionar
+análise dos achados
+refactor: polish documentation and portability
+
+paths relativos
+correções de encoding
+ajustes finais de README
+limpeza de artefatos locais
+chore: final project validation
+
+commit final com pequenos ajustes de consistência
+sem mudanças grandes de feature

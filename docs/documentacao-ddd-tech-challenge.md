@@ -67,6 +67,15 @@ Diagrama:
 
 ![Domain Storytelling](./diagramas/domain-storytelling-oficina-mvp.svg)
 
+Legenda aplicada conforme a aula de Domain Storytelling:
+
+- Atores: pictogramas de pessoas/sistemas que executam ou recebem a acao.
+- Objetos de trabalho: documentos, token, cliente, veiculo, catalogo, peca, OS, orcamento e historico.
+- Atividades: verbos de acao numerados em sequencia para contar a historia do dominio.
+- Grupos/cenarios: autenticacao, cadastros, abertura da OS, estoque, transicoes, tracking e excecoes.
+- Anotacoes: regras, limitacoes e gatilhos relevantes para cada parte da historia.
+- Acoes pivotais: atividades que mudam a fase da historia, como autenticar, preparar cadastros, criar OS, enviar orcamento, aprovar orcamento e entregar OS.
+
 Narrativas derivadas do codigo:
 
 1. Admin/Atendente informa credenciais e recebe token JWT.
@@ -78,11 +87,29 @@ Narrativas derivadas do codigo:
 7. Cliente consulta tracking publico com `workOrderId` e `document`.
 8. Fluxos invalidos sao bloqueados por politicas de dominio: credenciais invalidas, documento invalido, placa de outro cliente, estoque insuficiente, OS sem item, transicao invalida e tracking com documento divergente.
 
+Acoes pivotais destacadas no diagrama:
+
+- Autenticar admin
+- Preparar cadastros base
+- Criar OS
+- Enviar orcamento
+- Aprovar orcamento
+- Entregar OS
+
 ## 5) Event Storming (visual)
 
 Diagrama:
 
 ![Event Storming](./diagramas/event-storming-oficina-mvp.svg)
+
+Legenda aplicada conforme a aula de Event Storming:
+
+- Eventos de dominio: cartoes laranja, escritos no passado.
+- Comandos: cartoes azuis, escritos no imperativo.
+- Atores: cartoes amarelos pequenos conectados aos comandos.
+- Politicas: cartoes roxo claro que representam regras/automacoes que disparam comandos.
+- Pontos de atencao: losangos rosa para duvidas, riscos, excecoes e gargalos.
+- Eventos pivotais: linhas verticais na linha do tempo que marcam mudanca de fase/contexto.
 
 ### 5.1 Comandos (API)
 
@@ -121,7 +148,18 @@ Diagrama:
 - OS entregue
 - Tracking consultado pelo cliente
 
-### 5.3 Politicas/regras de negocio
+### 5.3 Eventos pivotais
+
+Os eventos pivotais marcam mudancas de fase e indicam possiveis fronteiras de contexto:
+
+- `Token JWT gerado`: troca de fase para operacoes administrativas autenticadas.
+- `Cadastros base preparados`: catalogo e dados base ficam disponiveis para abrir OS.
+- `OS criada`: inicio formal do ciclo operacional da oficina.
+- `Orcamento enviado`: troca de fase para decisao/aprovacao do cliente.
+- `Orcamento aprovado`: inicio da execucao do servico.
+- `OS entregue`: encerramento operacional e historico completo.
+
+### 5.4 Politicas/regras de negocio
 
 - Endpoints administrativos exigem JWT valido.
 - Documento deve ser CPF/CNPJ valido.
@@ -134,7 +172,7 @@ Diagrama:
 - Transicoes de status devem seguir a sequencia valida.
 - Tracking publico exige combinacao valida de `workOrderId` e `document`.
 
-### 5.4 Fluxos de excecao documentados
+### 5.5 Fluxos de excecao documentados
 
 | Excecao | Politica aplicada | Evidencia no codigo |
 |---|---|---|
