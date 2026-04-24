@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2200" height="1450" viewBox="0 0 2200 1450">
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+<path d="M0,0 L0,6 L9,3 z" fill="#34495e" />
+</marker>
+<style>
+.title { font: 700 34px Arial, sans-serif; fill: #1f2d3d; }
+.subtitle { font: 500 18px Arial, sans-serif; fill: #3c4f65; }
+.laneTitle { font: 700 18px Arial, sans-serif; fill: #1f2d3d; }
+.boxTitle { font: 700 16px Arial, sans-serif; fill: #12263a; }
+.boxText { font: 500 14px Arial, sans-serif; fill: #1f2d3d; }
+.small { font: 500 12px Arial, sans-serif; fill: #3a4a5f; }
+</style>
+</defs>
+<rect x="0" y="0" width="2200" height="1450" rx="0" ry="0" fill="#f5f8fc" stroke="#d7e0ea" stroke-width="1.5" />
+<text x="60" y="70" class="title">Domain Storytelling - Oficina MVP (baseado no codigo)</text>
+<text x="60" y="102" class="subtitle">Fluxo principal: criacao e acompanhamento da OS + controle de pecas/insumos</text>
+<rect x="50" y="140" width="2100" height="170" rx="10" ry="10" fill="#fff3e0" stroke="#c8d4e0" stroke-width="1.5" />
+<text x="70" y="170" class="laneTitle">Cliente</text>
+<rect x="50" y="340" width="2100" height="170" rx="10" ry="10" fill="#e8f4fd" stroke="#c8d4e0" stroke-width="1.5" />
+<text x="70" y="370" class="laneTitle">Atendente/Admin</text>
+<rect x="50" y="540" width="2100" height="170" rx="10" ry="10" fill="#ecf9f1" stroke="#c8d4e0" stroke-width="1.5" />
+<text x="70" y="570" class="laneTitle">Sistema Oficina (API + Dominio)</text>
+<rect x="50" y="740" width="2100" height="170" rx="10" ry="10" fill="#f3ecff" stroke="#c8d4e0" stroke-width="1.5" />
+<text x="70" y="770" class="laneTitle">Estoque/Servico</text>
+<rect x="120" y="170" width="230" height="90" rx="12" ry="12" fill="#ffdca8" stroke="#4a5a6a" stroke-width="1.5" />
+<text x="136" y="204" class="boxText"><tspan x="136" dy="0">Informa CPF/CNPJ</tspan><tspan x="136" dy="18">e dados do veiculo</tspan></text>
+<rect x="430" y="370" width="270" height="90" rx="12" ry="12" fill="#cde6ff" stroke="#4a5a6a" stroke-width="1.5" />
+<text x="446" y="404" class="boxText"><tspan x="446" dy="0">Cria OS na API</tspan><tspan x="446" dy="18">com servicos e pecas</tspan></text>
+<rect x="760" y="570" width="300" height="95" rx="12" ry="12" fill="#cfeeda" stroke="#4a5a6a" stroke-width="1.5" />
+<text x="776" y="604" class="boxText"><tspan x="776" dy="0">Valida cliente/placa</tspan><tspan x="776" dy="18">calcula orcamento</tspan><tspan x="776" dy="18">gera status RECEIVED</tspan></text>
+<rect x="1120" y="770" width="300" height="95" rx="12" ry="12" fill="#ddd2ff" stroke="#4a5a6a" stroke-width="1.5" />
+<text x="1136" y="804" class="boxText"><tspan x="1136" dy="0">Reserva estoque</tspan><tspan x="1136" dy="18">Remove quantidade</tspan><tspan x="1136" dy="18">de PartSupply</tspan></text>
+<rect x="1470" y="370" width="300" height="95" rx="12" ry="12" fill="#cde6ff" stroke="#4a5a6a" stroke-width="1.5" />
+<text x="1486" y="404" class="boxText"><tspan x="1486" dy="0">Aciona transicoes:</tspan><tspan x="1486" dy="18">diagnostico -> orcamento</tspan><tspan x="1486" dy="18">-> aprovacao</tspan></text>
+<rect x="1810" y="170" width="280" height="95" rx="12" ry="12" fill="#ffdca8" stroke="#4a5a6a" stroke-width="1.5" />
+<text x="1826" y="204" class="boxText"><tspan x="1826" dy="0">Aprova orcamento</tspan><tspan x="1826" dy="18">e acompanha status</tspan><tspan x="1826" dy="18">via API publica</tspan></text>
+<rect x="1470" y="570" width="300" height="95" rx="12" ry="12" fill="#cfeeda" stroke="#4a5a6a" stroke-width="1.5" />
+<text x="1486" y="604" class="boxText"><tspan x="1486" dy="0">Executa servico</tspan><tspan x="1486" dy="18">finaliza e entrega</tspan><tspan x="1486" dy="18">historico completo</tspan></text>
+<line x1="350" y1="215" x2="430" y2="415" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="700" y1="415" x2="760" y2="615" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="1060" y1="615" x2="1120" y2="815" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="1420" y1="815" x2="1470" y2="615" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="1620" y1="570" x2="1620" y2="465" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="1770" y1="415" x2="1810" y2="215" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+<rect x="60" y="950" width="2080" height="430" rx="10" ry="10" fill="#ffffff" stroke="#c8d4e0" stroke-width="1.5" />
+<text x="80" y="985" class="boxTitle">Evidencias no codigo da aplicacao</text>
+<text x="90" y="1020" class="boxText"><tspan x="90" dy="0">- WorkOrder inicia com status Received e historico inicial (WorkOrder.cs).</tspan><tspan x="90" dy="40">- Transicoes permitidas: StartDiagnosis, SendBudget, ApproveBudget, Finalize, Deliver (WorkOrder + WorkOrderApplicationService).</tspan><tspan x="90" dy="40">- Orcamento total = servicos + pecas (recalculo no agregado WorkOrder).</tspan><tspan x="90" dy="40">- Controle de estoque ocorre na criacao da OS com RemoveFromStock em PartSupply.</tspan><tspan x="90" dy="40">- Cliente acompanha via endpoint anonimo: GET /api/client/work-orders/{id}?document=...</tspan><tspan x="90" dy="40">- APIs administrativas exigem JWT ([Authorize] nos controllers de cadastro e OS).</tspan><tspan x="90" dy="40">- Validacoes de CPF/CNPJ e placa: DocumentValidator e LicensePlateValidator.</tspan></text>
+</svg>
