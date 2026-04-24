@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="2600" height="1650" viewBox="0 0 2600 1650">
+<svg xmlns="http://www.w3.org/2000/svg" width="3000" height="1850" viewBox="0 0 3000 1850">
 <defs>
 <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
 <path d="M0,0 L0,6 L9,3 z" fill="#34495e" />
@@ -6,108 +6,216 @@
 <style>
 .title { font: 700 34px Arial, sans-serif; fill: #1f2d3d; }
 .subtitle { font: 500 18px Arial, sans-serif; fill: #3c4f65; }
-.laneTitle { font: 700 18px Arial, sans-serif; fill: #1f2d3d; }
-.boxTitle { font: 700 16px Arial, sans-serif; fill: #12263a; }
-.boxText { font: 500 14px Arial, sans-serif; fill: #1f2d3d; }
+.section { font: 700 20px Arial, sans-serif; fill: #1f2d3d; }
+.boxTitle { font: 700 15px Arial, sans-serif; fill: #12263a; }
+.boxText { font: 500 13px Arial, sans-serif; fill: #1f2d3d; }
 .small { font: 500 12px Arial, sans-serif; fill: #3a4a5f; }
 </style>
 </defs>
-<rect x="0" y="0" width="2600" height="1650" rx="0" ry="0" fill="#f7f9fc" stroke="#d7e0ea" stroke-width="1.5" />
-<text x="60" y="70" class="title">Event Storming - Fluxo de Ordem de Servico e Estoque</text>
-<text x="60" y="102" class="subtitle">Comandos, eventos, politicas e agregados extraidos do comportamento implementado</text>
-<rect x="60" y="130" width="210" height="42" rx="8" ry="8" fill="#f6b26b" stroke="#b8c4d0" stroke-width="1.5" />
-<text x="74" y="157" class="small"><tspan x="74" dy="0">Evento de dominio</tspan></text>
-<rect x="530" y="130" width="210" height="42" rx="8" ry="8" fill="#9fc5e8" stroke="#b8c4d0" stroke-width="1.5" />
-<text x="544" y="157" class="small"><tspan x="544" dy="0">Comando/API</tspan></text>
-<rect x="1000" y="130" width="210" height="42" rx="8" ry="8" fill="#d9d2e9" stroke="#b8c4d0" stroke-width="1.5" />
-<text x="1014" y="157" class="small"><tspan x="1014" dy="0">Politica/Regra</tspan></text>
-<rect x="1470" y="130" width="210" height="42" rx="8" ry="8" fill="#ffe599" stroke="#b8c4d0" stroke-width="1.5" />
-<text x="1484" y="157" class="small"><tspan x="1484" dy="0">Agregado/Entidade</tspan></text>
-<rect x="1940" y="130" width="210" height="42" rx="8" ry="8" fill="#b6d7a8" stroke="#b8c4d0" stroke-width="1.5" />
-<text x="1954" y="157" class="small"><tspan x="1954" dy="0">Ator/Sistema externo</tspan></text>
-<rect x="60" y="210" width="2480" height="110" rx="10" ry="10" fill="#eef4fb" stroke="#c8d4e0" stroke-width="1.5" />
-<text x="80" y="244" class="boxTitle"><tspan x="80" dy="0">Atores: Cliente | Atendente/Admin | Sistema Oficina API | Estoque</tspan></text>
-<rect x="90" y="520" width="210" height="110" rx="10" ry="10" fill="#9fc5e8" stroke="#8fa3b7" stroke-width="1.5" />
-<text x="104" y="548" class="small"><tspan x="104" dy="0">CMD</tspan></text>
-<text x="104" y="570" class="boxText"><tspan x="104" dy="0">POST /api/work-orders</tspan><tspan x="104" dy="18">Criar OS</tspan></text>
-<rect x="330" y="520" width="210" height="110" rx="10" ry="10" fill="#d9d2e9" stroke="#8fa3b7" stroke-width="1.5" />
-<text x="344" y="548" class="small"><tspan x="344" dy="0">POL</tspan></text>
-<text x="344" y="570" class="boxText"><tspan x="344" dy="0">Validar CPF/CNPJ</tspan><tspan x="344" dy="18">e placa</tspan></text>
-<rect x="570" y="520" width="210" height="110" rx="10" ry="10" fill="#f6b26b" stroke="#8fa3b7" stroke-width="1.5" />
-<text x="584" y="548" class="small"><tspan x="584" dy="0">EVT</tspan></text>
-<text x="584" y="570" class="boxText"><tspan x="584" dy="0">OS criada</tspan><tspan x="584" dy="18">status: Received</tspan></text>
-<rect x="810" y="520" width="210" height="110" rx="10" ry="10" fill="#d9d2e9" stroke="#8fa3b7" stroke-width="1.5" />
-<text x="824" y="548" class="small"><tspan x="824" dy="0">POL</tspan></text>
-<text x="824" y="570" class="boxText"><tspan x="824" dy="0">Calcular orcamento</tspan><tspan x="824" dy="18">servicos + pecas</tspan></text>
-<rect x="1050" y="520" width="210" height="110" rx="10" ry="10" fill="#9fc5e8" stroke="#8fa3b7" stroke-width="1.5" />
-<text x="1064" y="548" class="small"><tspan x="1064" dy="0">CMD</tspan></text>
-<text x="1064" y="570" class="boxText"><tspan x="1064" dy="0">Reservar pecas</tspan><tspan x="1064" dy="18">na criacao da OS</tspan></text>
-<rect x="1290" y="520" width="210" height="110" rx="10" ry="10" fill="#f6b26b" stroke="#8fa3b7" stroke-width="1.5" />
-<text x="1304" y="548" class="small"><tspan x="1304" dy="0">EVT</tspan></text>
-<text x="1304" y="570" class="boxText"><tspan x="1304" dy="0">Estoque atualizado</tspan><tspan x="1304" dy="18">partes debitadas</tspan></text>
-<rect x="1530" y="520" width="210" height="110" rx="10" ry="10" fill="#9fc5e8" stroke="#8fa3b7" stroke-width="1.5" />
-<text x="1544" y="548" class="small"><tspan x="1544" dy="0">CMD</tspan></text>
-<text x="1544" y="570" class="boxText"><tspan x="1544" dy="0">POST /start-diagnosis</tspan><tspan x="1544" dy="18">POST /send-budget</tspan></text>
-<rect x="1770" y="520" width="210" height="110" rx="10" ry="10" fill="#f6b26b" stroke="#8fa3b7" stroke-width="1.5" />
-<text x="1784" y="548" class="small"><tspan x="1784" dy="0">EVT</tspan></text>
-<text x="1784" y="570" class="boxText"><tspan x="1784" dy="0">OS em diagnostico</tspan><tspan x="1784" dy="18">OS aguardando aprovacao</tspan></text>
-<rect x="2010" y="520" width="210" height="110" rx="10" ry="10" fill="#9fc5e8" stroke="#8fa3b7" stroke-width="1.5" />
-<text x="2024" y="548" class="small"><tspan x="2024" dy="0">CMD</tspan></text>
-<text x="2024" y="570" class="boxText"><tspan x="2024" dy="0">POST /approve-budget</tspan></text>
-<rect x="2250" y="520" width="210" height="110" rx="10" ry="10" fill="#f6b26b" stroke="#8fa3b7" stroke-width="1.5" />
-<text x="2264" y="548" class="small"><tspan x="2264" dy="0">EVT</tspan></text>
-<text x="2264" y="570" class="boxText"><tspan x="2264" dy="0">OS em execucao</tspan></text>
-<line x1="300" y1="575" x2="330" y2="575" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
-<line x1="540" y1="575" x2="570" y2="575" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
-<line x1="780" y1="575" x2="810" y2="575" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
-<line x1="1020" y1="575" x2="1050" y2="575" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
-<line x1="1260" y1="575" x2="1290" y2="575" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
-<line x1="1500" y1="575" x2="1530" y2="575" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
-<line x1="1740" y1="575" x2="1770" y2="575" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
-<line x1="1980" y1="575" x2="2010" y2="575" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
-<line x1="2220" y1="575" x2="2250" y2="575" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
-<rect x="1290" y="760" width="210" height="110" rx="10" ry="10" fill="#9fc5e8" stroke="#8fa3b7" stroke-width="1.5" />
-<text x="1304" y="788" class="small"><tspan x="1304" dy="0">CMD</tspan></text>
-<text x="1304" y="810" class="boxText"><tspan x="1304" dy="0">POST /finalize</tspan></text>
-<rect x="1530" y="760" width="210" height="110" rx="10" ry="10" fill="#f6b26b" stroke="#8fa3b7" stroke-width="1.5" />
-<text x="1544" y="788" class="small"><tspan x="1544" dy="0">EVT</tspan></text>
-<text x="1544" y="810" class="boxText"><tspan x="1544" dy="0">OS finalizada</tspan></text>
-<rect x="1770" y="760" width="210" height="110" rx="10" ry="10" fill="#9fc5e8" stroke="#8fa3b7" stroke-width="1.5" />
-<text x="1784" y="788" class="small"><tspan x="1784" dy="0">CMD</tspan></text>
-<text x="1784" y="810" class="boxText"><tspan x="1784" dy="0">POST /deliver</tspan></text>
-<rect x="2010" y="760" width="210" height="110" rx="10" ry="10" fill="#f6b26b" stroke="#8fa3b7" stroke-width="1.5" />
-<text x="2024" y="788" class="small"><tspan x="2024" dy="0">EVT</tspan></text>
-<text x="2024" y="810" class="boxText"><tspan x="2024" dy="0">OS entregue</tspan><tspan x="2024" dy="18">historico completo</tspan></text>
-<rect x="2250" y="760" width="210" height="110" rx="10" ry="10" fill="#9fc5e8" stroke="#8fa3b7" stroke-width="1.5" />
-<text x="2264" y="788" class="small"><tspan x="2264" dy="0">CMD</tspan></text>
-<text x="2264" y="810" class="boxText"><tspan x="2264" dy="0">GET /client/work-orders</tspan><tspan x="2264" dy="18">Acompanhamento cliente</tspan></text>
-<line x1="1500" y1="815" x2="1530" y2="815" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
-<line x1="1740" y1="815" x2="1770" y2="815" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
-<line x1="1980" y1="815" x2="2010" y2="815" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
-<line x1="2220" y1="815" x2="2250" y2="815" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
-<rect x="60" y="940" width="2480" height="650" rx="10" ry="10" fill="#ffffff" stroke="#c8d4e0" stroke-width="1.5" />
-<text x="80" y="978" class="boxTitle"><tspan x="80" dy="0">Agregados, Politicas e Consistencia (implementacao atual)</tspan></text>
-<rect x="90" y="1010" width="300" height="150" rx="10" ry="10" fill="#ffe599" stroke="#baa84f" stroke-width="1.5" />
-<text x="104" y="1048" class="boxText"><tspan x="104" dy="0">Agregado: WorkOrder</tspan><tspan x="104" dy="24">- Status e transicoes</tspan><tspan x="104" dy="24">- Totais e historico</tspan></text>
-<rect x="430" y="1010" width="300" height="150" rx="10" ry="10" fill="#ffe599" stroke="#baa84f" stroke-width="1.5" />
-<text x="444" y="1048" class="boxText"><tspan x="444" dy="0">Entidade: Customer</tspan><tspan x="444" dy="24">- Documento unico</tspan><tspan x="444" dy="24">- Vinculo com veiculos</tspan></text>
-<rect x="770" y="1010" width="300" height="150" rx="10" ry="10" fill="#ffe599" stroke="#baa84f" stroke-width="1.5" />
-<text x="784" y="1048" class="boxText"><tspan x="784" dy="0">Entidade: Vehicle</tspan><tspan x="784" dy="24">- Placa unica</tspan><tspan x="784" dy="24">- Pertence a um cliente</tspan></text>
-<rect x="1110" y="1010" width="300" height="150" rx="10" ry="10" fill="#ffe599" stroke="#baa84f" stroke-width="1.5" />
-<text x="1124" y="1048" class="boxText"><tspan x="1124" dy="0">Entidade: PartSupply</tspan><tspan x="1124" dy="24">- Estoque</tspan><tspan x="1124" dy="24">- RemoveFromStock</tspan></text>
-<rect x="1450" y="1010" width="300" height="150" rx="10" ry="10" fill="#ffe599" stroke="#baa84f" stroke-width="1.5" />
-<text x="1464" y="1048" class="boxText"><tspan x="1464" dy="0">Entidade: RepairService</tspan><tspan x="1464" dy="24">- Preco de mao de obra</tspan><tspan x="1464" dy="24">- Duracao media</tspan></text>
-<rect x="90" y="1220" width="300" height="150" rx="10" ry="10" fill="#d9d2e9" stroke="#9a8fb3" stroke-width="1.5" />
-<text x="104" y="1258" class="boxText"><tspan x="104" dy="0">Politica: OS deve ter</tspan><tspan x="104" dy="24">ao menos servico ou peca</tspan></text>
-<rect x="430" y="1220" width="300" height="150" rx="10" ry="10" fill="#d9d2e9" stroke="#9a8fb3" stroke-width="1.5" />
-<text x="444" y="1258" class="boxText"><tspan x="444" dy="0">Politica: transicoes</tspan><tspan x="444" dy="24">de status invalidas</tspan><tspan x="444" dy="24">sao bloqueadas</tspan></text>
-<rect x="770" y="1220" width="300" height="150" rx="10" ry="10" fill="#d9d2e9" stroke="#9a8fb3" stroke-width="1.5" />
-<text x="784" y="1258" class="boxText"><tspan x="784" dy="0">Politica: cliente e placa</tspan><tspan x="784" dy="24">devem ser validos</tspan><tspan x="784" dy="24">e consistentes</tspan></text>
-<rect x="1110" y="1220" width="300" height="150" rx="10" ry="10" fill="#d9d2e9" stroke="#9a8fb3" stroke-width="1.5" />
-<text x="1124" y="1258" class="boxText"><tspan x="1124" dy="0">Politica: estoque nao</tspan><tspan x="1124" dy="24">pode ficar negativo</tspan></text>
-<rect x="1450" y="1220" width="300" height="150" rx="10" ry="10" fill="#d9d2e9" stroke="#9a8fb3" stroke-width="1.5" />
-<text x="1464" y="1258" class="boxText"><tspan x="1464" dy="0">Politica: endpoints</tspan><tspan x="1464" dy="24">administrativos exigem</tspan><tspan x="1464" dy="24">JWT valido</tspan></text>
-<rect x="1810" y="1010" width="700" height="360" rx="10" ry="10" fill="#e8f4fd" stroke="#8fb0cf" stroke-width="1.5" />
-<text x="1830" y="1045" class="boxTitle"><tspan x="1830" dy="0">Comandos expostos na API (controllers):</tspan></text>
-<text x="1840" y="1080" class="boxText"><tspan x="1840" dy="0">- POST /api/work-orders</tspan><tspan x="1840" dy="30">- POST /api/work-orders/{id}/start-diagnosis</tspan><tspan x="1840" dy="30">- POST /api/work-orders/{id}/send-budget</tspan><tspan x="1840" dy="30">- POST /api/work-orders/{id}/approve-budget</tspan><tspan x="1840" dy="30">- POST /api/work-orders/{id}/finalize</tspan><tspan x="1840" dy="30">- POST /api/work-orders/{id}/deliver</tspan><tspan x="1840" dy="30">- GET /api/client/work-orders/{id}?document=...</tspan><tspan x="1840" dy="30">- CRUD: /api/customers, /api/vehicles, /api/services, /api/parts</tspan></text>
+
+<rect x="0" y="0" width="3000" height="1850" fill="#f7f9fc" stroke="#d7e0ea" stroke-width="1.5" />
+<text x="60" y="70" class="title">Event Storming - Oficina MVP</text>
+<text x="60" y="102" class="subtitle">Comandos, eventos, politicas, agregados e excecoes extraidos da implementacao</text>
+
+<rect x="60" y="130" width="210" height="42" rx="8" fill="#9fc5e8" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="74" y="157" class="small">Comando/API</text>
+<rect x="310" y="130" width="210" height="42" rx="8" fill="#f6b26b" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="324" y="157" class="small">Evento de dominio</text>
+<rect x="560" y="130" width="210" height="42" rx="8" fill="#d9d2e9" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="574" y="157" class="small">Politica/Regra</text>
+<rect x="810" y="130" width="210" height="42" rx="8" fill="#ffe599" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="824" y="157" class="small">Agregado/Entidade</text>
+<rect x="1060" y="130" width="210" height="42" rx="8" fill="#b6d7a8" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="1074" y="157" class="small">Ator/Sistema</text>
+<rect x="1310" y="130" width="210" height="42" rx="8" fill="#f4cccc" stroke="#9a5a5a" stroke-width="1.5" />
+<text x="1324" y="157" class="small">Excecao</text>
+
+<text x="60" y="230" class="section">1. Identidade e acesso</text>
+<rect x="70" y="260" width="210" height="100" rx="10" fill="#b6d7a8" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="86" y="286" class="small">ATOR</text>
+<text x="86" y="310" class="boxText"><tspan x="86" dy="0">Admin/Atendente</tspan><tspan x="86" dy="18">precisa acessar API</tspan></text>
+<rect x="330" y="260" width="260" height="100" rx="10" fill="#9fc5e8" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="346" y="286" class="small">CMD</text>
+<text x="346" y="310" class="boxText"><tspan x="346" dy="0">POST /api/auth/token</tspan><tspan x="346" dy="18">Enviar username/password</tspan></text>
+<rect x="640" y="260" width="250" height="100" rx="10" fill="#d9d2e9" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="656" y="286" class="small">POL</text>
+<text x="656" y="310" class="boxText"><tspan x="656" dy="0">Validar AdminCredentials</tspan><tspan x="656" dy="18">e parametros Jwt</tspan></text>
+<rect x="940" y="260" width="230" height="100" rx="10" fill="#f6b26b" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="956" y="286" class="small">EVT</text>
+<text x="956" y="310" class="boxText"><tspan x="956" dy="0">Token JWT gerado</tspan><tspan x="956" dy="18">TokenResponse</tspan></text>
+<rect x="1220" y="260" width="260" height="100" rx="10" fill="#f4cccc" stroke="#9a5a5a" stroke-width="1.5" />
+<text x="1236" y="286" class="small">EXC</text>
+<text x="1236" y="310" class="boxText"><tspan x="1236" dy="0">Credenciais invalidas</tspan><tspan x="1236" dy="18">retornam 401</tspan></text>
+
+<line x1="280" y1="310" x2="330" y2="310" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="590" y1="310" x2="640" y2="310" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="890" y1="310" x2="940" y2="310" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="890" y1="330" x2="1220" y2="330" stroke="#9a5a5a" stroke-width="2" stroke-dasharray="8 6" marker-end="url(#arrow)" />
+
+<text x="60" y="440" class="section">2. Cadastros administrativos autenticados</text>
+<rect x="70" y="470" width="260" height="105" rx="10" fill="#9fc5e8" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="86" y="496" class="small">CMD</text>
+<text x="86" y="520" class="boxText"><tspan x="86" dy="0">CRUD /api/customers</tspan><tspan x="86" dy="18">Cadastrar cliente</tspan></text>
+<rect x="370" y="470" width="240" height="105" rx="10" fill="#f6b26b" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="386" y="496" class="small">EVT</text>
+<text x="386" y="520" class="boxText"><tspan x="386" dy="0">Cliente cadastrado</tspan><tspan x="386" dy="18">Customer persistido</tspan></text>
+<rect x="650" y="470" width="260" height="105" rx="10" fill="#9fc5e8" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="666" y="496" class="small">CMD</text>
+<text x="666" y="520" class="boxText"><tspan x="666" dy="0">CRUD /api/vehicles</tspan><tspan x="666" dy="18">Vincular veiculo</tspan></text>
+<rect x="950" y="470" width="250" height="105" rx="10" fill="#f6b26b" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="966" y="496" class="small">EVT</text>
+<text x="966" y="520" class="boxText"><tspan x="966" dy="0">Veiculo vinculado</tspan><tspan x="966" dy="18">Vehicle persistido</tspan></text>
+<rect x="1240" y="470" width="260" height="105" rx="10" fill="#9fc5e8" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="1256" y="496" class="small">CMD</text>
+<text x="1256" y="520" class="boxText"><tspan x="1256" dy="0">CRUD /api/services</tspan><tspan x="1256" dy="18">Cadastrar servico</tspan></text>
+<rect x="1540" y="470" width="250" height="105" rx="10" fill="#f6b26b" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="1556" y="496" class="small">EVT</text>
+<text x="1556" y="520" class="boxText"><tspan x="1556" dy="0">Servico cadastrado</tspan><tspan x="1556" dy="18">RepairService disponivel</tspan></text>
+<rect x="1830" y="470" width="260" height="105" rx="10" fill="#9fc5e8" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="1846" y="496" class="small">CMD</text>
+<text x="1846" y="520" class="boxText"><tspan x="1846" dy="0">CRUD /api/parts</tspan><tspan x="1846" dy="18">Cadastrar peca/insumo</tspan></text>
+<rect x="2130" y="470" width="270" height="105" rx="10" fill="#f6b26b" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="2146" y="496" class="small">EVT</text>
+<text x="2146" y="520" class="boxText"><tspan x="2146" dy="0">Peca/Insumo cadastrado</tspan><tspan x="2146" dy="18">PartSupply disponivel</tspan></text>
+<rect x="2440" y="470" width="480" height="105" rx="10" fill="#d9d2e9" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="2456" y="496" class="small">POL</text>
+<text x="2456" y="520" class="boxText"><tspan x="2456" dy="0">JWT obrigatorio; documento, placa, preco, duracao e estoque validos.</tspan><tspan x="2456" dy="18">Falhas retornam erros controlados pelo middleware.</tspan></text>
+
+<line x1="330" y1="522" x2="370" y2="522" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="610" y1="522" x2="650" y2="522" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="910" y1="522" x2="950" y2="522" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="1200" y1="522" x2="1240" y2="522" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="1500" y1="522" x2="1540" y2="522" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="1790" y1="522" x2="1830" y2="522" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="2090" y1="522" x2="2130" y2="522" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="2400" y1="522" x2="2440" y2="522" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+
+<text x="60" y="655" class="section">3. Ordem de Servico, estoque e ciclo operacional</text>
+<rect x="70" y="685" width="250" height="105" rx="10" fill="#9fc5e8" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="86" y="711" class="small">CMD</text>
+<text x="86" y="735" class="boxText"><tspan x="86" dy="0">POST /api/work-orders</tspan><tspan x="86" dy="18">Criar OS</tspan></text>
+<rect x="360" y="685" width="260" height="105" rx="10" fill="#d9d2e9" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="376" y="711" class="small">POL</text>
+<text x="376" y="735" class="boxText"><tspan x="376" dy="0">Validar cliente, placa,</tspan><tspan x="376" dy="18">servicos, pecas e quantidades</tspan></text>
+<rect x="660" y="685" width="230" height="105" rx="10" fill="#f6b26b" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="676" y="711" class="small">EVT</text>
+<text x="676" y="735" class="boxText"><tspan x="676" dy="0">OS criada</tspan><tspan x="676" dy="18">status Received</tspan></text>
+<rect x="930" y="685" width="250" height="105" rx="10" fill="#d9d2e9" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="946" y="711" class="small">POL</text>
+<text x="946" y="735" class="boxText"><tspan x="946" dy="0">Calcular BudgetTotal</tspan><tspan x="946" dy="18">servicos + pecas</tspan></text>
+<rect x="1220" y="685" width="250" height="105" rx="10" fill="#f6b26b" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="1236" y="711" class="small">EVT</text>
+<text x="1236" y="735" class="boxText"><tspan x="1236" dy="0">Orcamento calculado</tspan><tspan x="1236" dy="18">historico inicial criado</tspan></text>
+<rect x="1510" y="685" width="250" height="105" rx="10" fill="#d9d2e9" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="1526" y="711" class="small">POL</text>
+<text x="1526" y="735" class="boxText"><tspan x="1526" dy="0">Baixar estoque</tspan><tspan x="1526" dy="18">RemoveFromStock</tspan></text>
+<rect x="1800" y="685" width="250" height="105" rx="10" fill="#f6b26b" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="1816" y="711" class="small">EVT</text>
+<text x="1816" y="735" class="boxText"><tspan x="1816" dy="0">Estoque debitado</tspan><tspan x="1816" dy="18">PartSupply atualizado</tspan></text>
+
+<line x1="320" y1="737" x2="360" y2="737" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="620" y1="737" x2="660" y2="737" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="890" y1="737" x2="930" y2="737" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="1180" y1="737" x2="1220" y2="737" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="1470" y1="737" x2="1510" y2="737" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="1760" y1="737" x2="1800" y2="737" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+
+<rect x="70" y="860" width="265" height="105" rx="10" fill="#9fc5e8" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="86" y="886" class="small">CMD</text>
+<text x="86" y="910" class="boxText"><tspan x="86" dy="0">POST /start-diagnosis</tspan><tspan x="86" dy="18">Iniciar diagnostico</tspan></text>
+<rect x="375" y="860" width="230" height="105" rx="10" fill="#f6b26b" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="391" y="886" class="small">EVT</text>
+<text x="391" y="910" class="boxText"><tspan x="391" dy="0">OS em diagnostico</tspan></text>
+<rect x="645" y="860" width="250" height="105" rx="10" fill="#9fc5e8" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="661" y="886" class="small">CMD</text>
+<text x="661" y="910" class="boxText"><tspan x="661" dy="0">POST /send-budget</tspan><tspan x="661" dy="18">Enviar orcamento</tspan></text>
+<rect x="935" y="860" width="260" height="105" rx="10" fill="#f6b26b" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="951" y="886" class="small">EVT</text>
+<text x="951" y="910" class="boxText"><tspan x="951" dy="0">OS aguardando</tspan><tspan x="951" dy="18">aprovacao</tspan></text>
+<rect x="1235" y="860" width="260" height="105" rx="10" fill="#9fc5e8" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="1251" y="886" class="small">CMD</text>
+<text x="1251" y="910" class="boxText"><tspan x="1251" dy="0">POST /approve-budget</tspan><tspan x="1251" dy="18">Aprovar orcamento</tspan></text>
+<rect x="1535" y="860" width="230" height="105" rx="10" fill="#f6b26b" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="1551" y="886" class="small">EVT</text>
+<text x="1551" y="910" class="boxText"><tspan x="1551" dy="0">OS em execucao</tspan></text>
+<rect x="1805" y="860" width="230" height="105" rx="10" fill="#9fc5e8" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="1821" y="886" class="small">CMD</text>
+<text x="1821" y="910" class="boxText"><tspan x="1821" dy="0">POST /finalize</tspan></text>
+<rect x="2075" y="860" width="230" height="105" rx="10" fill="#f6b26b" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="2091" y="886" class="small">EVT</text>
+<text x="2091" y="910" class="boxText"><tspan x="2091" dy="0">OS finalizada</tspan></text>
+<rect x="2345" y="860" width="230" height="105" rx="10" fill="#9fc5e8" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="2361" y="886" class="small">CMD</text>
+<text x="2361" y="910" class="boxText"><tspan x="2361" dy="0">POST /deliver</tspan></text>
+<rect x="2615" y="860" width="230" height="105" rx="10" fill="#f6b26b" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="2631" y="886" class="small">EVT</text>
+<text x="2631" y="910" class="boxText"><tspan x="2631" dy="0">OS entregue</tspan></text>
+
+<line x1="335" y1="912" x2="375" y2="912" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="605" y1="912" x2="645" y2="912" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="895" y1="912" x2="935" y2="912" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="1195" y1="912" x2="1235" y2="912" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="1495" y1="912" x2="1535" y2="912" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="1765" y1="912" x2="1805" y2="912" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="2035" y1="912" x2="2075" y2="912" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="2305" y1="912" x2="2345" y2="912" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="2575" y1="912" x2="2615" y2="912" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+
+<text x="60" y="1055" class="section">4. Tracking publico e metricas</text>
+<rect x="70" y="1085" width="260" height="105" rx="10" fill="#b6d7a8" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="86" y="1111" class="small">ATOR</text>
+<text x="86" y="1135" class="boxText"><tspan x="86" dy="0">Cliente acompanha</tspan><tspan x="86" dy="18">andamento da OS</tspan></text>
+<rect x="380" y="1085" width="330" height="105" rx="10" fill="#9fc5e8" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="396" y="1111" class="small">CMD</text>
+<text x="396" y="1135" class="boxText"><tspan x="396" dy="0">GET /api/client/work-orders/{id}</tspan><tspan x="396" dy="18">query: document</tspan></text>
+<rect x="760" y="1085" width="270" height="105" rx="10" fill="#d9d2e9" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="776" y="1111" class="small">POL</text>
+<text x="776" y="1135" class="boxText"><tspan x="776" dy="0">Documento deve pertencer</tspan><tspan x="776" dy="18">ao cliente da OS</tspan></text>
+<rect x="1080" y="1085" width="260" height="105" rx="10" fill="#f6b26b" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="1096" y="1111" class="small">EVT</text>
+<text x="1096" y="1135" class="boxText"><tspan x="1096" dy="0">Tracking consultado</tspan><tspan x="1096" dy="18">ClientTrackingResponse</tspan></text>
+<rect x="1400" y="1085" width="300" height="105" rx="10" fill="#9fc5e8" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="1416" y="1111" class="small">CMD</text>
+<text x="1416" y="1135" class="boxText"><tspan x="1416" dy="0">GET /api/work-orders/metrics</tspan><tspan x="1416" dy="18">average-execution-time</tspan></text>
+<rect x="1750" y="1085" width="270" height="105" rx="10" fill="#f6b26b" stroke="#8fa3b7" stroke-width="1.5" />
+<text x="1766" y="1111" class="small">EVT</text>
+<text x="1766" y="1135" class="boxText"><tspan x="1766" dy="0">Tempo medio calculado</tspan><tspan x="1766" dy="18">AverageExecutionTime</tspan></text>
+
+<line x1="330" y1="1137" x2="380" y2="1137" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="710" y1="1137" x2="760" y2="1137" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="1030" y1="1137" x2="1080" y2="1137" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="1700" y1="1137" x2="1750" y2="1137" stroke="#34495e" stroke-width="2" marker-end="url(#arrow)" />
+
+<text x="60" y="1280" class="section">5. Excecoes e politicas transversais</text>
+<rect x="70" y="1310" width="410" height="120" rx="10" fill="#f4cccc" stroke="#9a5a5a" stroke-width="1.5" />
+<text x="90" y="1342" class="boxTitle">Validacao de entrada</text>
+<text x="90" y="1368" class="boxText"><tspan x="90" dy="0">Documento invalido, placa invalida, OS sem item,</tspan><tspan x="90" dy="18">quantidade menor ou igual a zero.</tspan></text>
+<rect x="520" y="1310" width="410" height="120" rx="10" fill="#f4cccc" stroke="#9a5a5a" stroke-width="1.5" />
+<text x="540" y="1342" class="boxTitle">Consistencia entre entidades</text>
+<text x="540" y="1368" class="boxText"><tspan x="540" dy="0">Cliente inexistente, placa ja vinculada a outro</tspan><tspan x="540" dy="18">cliente, servico ou peca inexistente.</tspan></text>
+<rect x="970" y="1310" width="410" height="120" rx="10" fill="#f4cccc" stroke="#9a5a5a" stroke-width="1.5" />
+<text x="990" y="1342" class="boxTitle">Estoque</text>
+<text x="990" y="1368" class="boxText"><tspan x="990" dy="0">Estoque insuficiente bloqueia a OS e evita saldo</tspan><tspan x="990" dy="18">negativo em PartSupply.</tspan></text>
+<rect x="1420" y="1310" width="410" height="120" rx="10" fill="#f4cccc" stroke="#9a5a5a" stroke-width="1.5" />
+<text x="1440" y="1342" class="boxTitle">Ciclo da OS</text>
+<text x="1440" y="1368" class="boxText"><tspan x="1440" dy="0">Transicao invalida e bloqueada por WorkOrder</tspan><tspan x="1440" dy="18">para preservar o lifecycle.</tspan></text>
+<rect x="1870" y="1310" width="410" height="120" rx="10" fill="#f4cccc" stroke="#9a5a5a" stroke-width="1.5" />
+<text x="1890" y="1342" class="boxTitle">Acesso e privacidade</text>
+<text x="1890" y="1368" class="boxText"><tspan x="1890" dy="0">JWT ausente bloqueia admin; tracking com documento</tspan><tspan x="1890" dy="18">divergente nao revela OS de outro cliente.</tspan></text>
+
+<text x="60" y="1515" class="section">6. Agregados e componentes principais</text>
+<rect x="70" y="1545" width="330" height="110" rx="10" fill="#ffe599" stroke="#baa84f" stroke-width="1.5" />
+<text x="90" y="1580" class="boxText"><tspan x="90" dy="0">WorkOrder</tspan><tspan x="90" dy="22">Status, totais, historico e transicoes</tspan></text>
+<rect x="440" y="1545" width="330" height="110" rx="10" fill="#ffe599" stroke="#baa84f" stroke-width="1.5" />
+<text x="460" y="1580" class="boxText"><tspan x="460" dy="0">Customer + Vehicle</tspan><tspan x="460" dy="22">Documento, placa e vinculo de propriedade</tspan></text>
+<rect x="810" y="1545" width="330" height="110" rx="10" fill="#ffe599" stroke="#baa84f" stroke-width="1.5" />
+<text x="830" y="1580" class="boxText"><tspan x="830" dy="0">RepairService</tspan><tspan x="830" dy="22">Servico, preco de mao de obra e duracao</tspan></text>
+<rect x="1180" y="1545" width="330" height="110" rx="10" fill="#ffe599" stroke="#baa84f" stroke-width="1.5" />
+<text x="1200" y="1580" class="boxText"><tspan x="1200" dy="0">PartSupply</tspan><tspan x="1200" dy="22">Peca/insumo, preco unitario e estoque</tspan></text>
+<rect x="1550" y="1545" width="330" height="110" rx="10" fill="#ffe599" stroke="#baa84f" stroke-width="1.5" />
+<text x="1570" y="1580" class="boxText"><tspan x="1570" dy="0">AuthController + TokenService</tspan><tspan x="1570" dy="22">Geracao e validacao do acesso administrativo</tspan></text>
+<rect x="1920" y="1545" width="330" height="110" rx="10" fill="#ffe599" stroke="#baa84f" stroke-width="1.5" />
+<text x="1940" y="1580" class="boxText"><tspan x="1940" dy="0">ClientTrackingController</tspan><tspan x="1940" dy="22">Consulta publica por id da OS + documento</tspan></text>
+<rect x="2290" y="1545" width="590" height="110" rx="10" fill="#d9d2e9" stroke="#9a8fb3" stroke-width="1.5" />
+<text x="2310" y="1580" class="boxText"><tspan x="2310" dy="0">ExceptionHandlingMiddleware</tspan><tspan x="2310" dy="22">Converte DomainException e erros conhecidos em respostas controladas</tspan></text>
 </svg>

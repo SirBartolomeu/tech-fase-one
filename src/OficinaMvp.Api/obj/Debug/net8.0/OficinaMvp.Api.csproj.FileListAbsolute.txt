@@ -76,3 +76,4 @@ C:\Users\AAMJOF\Desktop\FIAP\Tech-Challenge-1\oficina-mvp\src\OficinaMvp.Api\obj
 C:\Users\AAMJOF\Desktop\FIAP\Tech-Challenge-1\oficina-mvp\src\OficinaMvp.Api\obj\Debug\net8.0\OficinaMvp.Api.pdb
 C:\Users\AAMJOF\Desktop\FIAP\Tech-Challenge-1\oficina-mvp\src\OficinaMvp.Api\obj\Debug\net8.0\OficinaMvp.Api.genruntimeconfig.cache
 C:\Users\AAMJOF\Desktop\FIAP\Tech-Challenge-1\oficina-mvp\src\OficinaMvp.Api\obj\Debug\net8.0\ref\OficinaMvp.Api.dll
+C:\Users\AAMJOF\Desktop\FIAP\Tech-Challenge-1\oficina-mvp\src\OficinaMvp.Api\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

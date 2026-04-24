@@ -5,6 +5,7 @@ API REST para gestao de oficina mecanica, implementada em `.NET 8` com `C#`, arq
 ## Documentacao DDD do desafio
 
 - Documento principal: `docs/documentacao-ddd-tech-challenge.md`
+- Roteiro de apresentacao (15 min): `docs/roteiro-video-15min-tech-challenge.md`
 - Diagramas visuais:
   - `docs/diagramas/domain-storytelling-oficina-mvp.svg`
   - `docs/diagramas/event-storming-oficina-mvp.svg`
