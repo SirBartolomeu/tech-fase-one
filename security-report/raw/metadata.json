@@ -1,0 +1,12 @@
+﻿{
+    "generatedAtUtc":  "2026-04-24T13:00:01.5860704Z",
+    "machineName":  "M24281",
+    "userName":  "AAMJOF",
+    "gitCommit":  "N/A",
+    "gitBranch":  "N/A",
+    "dotnetVersion":  "9.0.301",
+    "pythonVersion":  "Python 3.11.9",
+    "dockerVersion":  "Docker version 29.4.0, build 9d7ad9f",
+    "semgrepVersion":  "not-installed",
+    "scoutVersion":  "⢀⢀⢀             ⣀⣀⡤⣔⢖⣖⢽⢝\r\n   ⡠⡢⡣⡣⡣⡣⡣⡣⡢⡀    ⢀⣠⢴⡲⣫⡺⣜⢞⢮⡳⡵⡹⡅\r\n  ⡜⡜⡜⡜⡜⡜⠜⠈⠈        ⠁⠙⠮⣺⡪⡯⣺⡪⡯⣺ \r\n ⢘⢜⢜⢜⢜⠜               ⠈⠪⡳⡵⣹⡪⠇ \r\n ⠨⡪⡪⡪⠂    ⢀⡤⣖⢽⡹⣝⡝⣖⢤⡀    ⠘⢝⢮⡚       _____                 _   \r\n  ⠱⡱⠁    ⡴⡫⣞⢮⡳⣝⢮⡺⣪⡳⣝⢦    ⠘⡵⠁      / ____| Docker        | |  \r\n   ⠁    ⣸⢝⣕⢗⡵⣝⢮⡳⣝⢮⡺⣪⡳⣣    ⠁      | (___   ___ ___  _   _| |_ \r\n        ⣗⣝⢮⡳⣝⢮⡳⣝⢮⡳⣝⢮⢮⡳            \\___ \\ / __/ _ \\| | | | __|\r\n   ⢀    ⢱⡳⡵⣹⡪⡳⣝⢮⡳⣝⢮⡳⡣⡏    ⡀       ____) | (_| (_) | |_| | |_ \r\n  ⢀⢾⠄    ⠫⣞⢮⡺⣝⢮⡳⣝⢮⡳⣝⠝    ⢠⢣⢂     |_____/ \\___\\___/ \\__,_|\\__|\r\n  ⡼⣕⢗⡄    ⠈⠓⠝⢮⡳⣝⠮⠳⠙     ⢠⢢⢣⢣  \r\n ⢰⡫⡮⡳⣝⢦⡀              ⢀⢔⢕⢕⢕⢕⠅ \r\n ⡯⣎⢯⡺⣪⡳⣝⢖⣄⣀        ⡀⡠⡢⡣⡣⡣⡣⡣⡃  \r\n⢸⢝⢮⡳⣝⢮⡺⣪⡳⠕⠗⠉⠁    ⠘⠜⡜⡜⡜⡜⡜⡜⠜⠈   \r\n⡯⡳⠳⠝⠊⠓⠉             ⠈⠈⠈⠈      \r\n\r\n\r\n\r\nversion: v1.20.4 (go1.25.5 - windows/amd64)\r\ngit commit: 27a30b2a666b98e09711750a62eb70f15c779737"
+}

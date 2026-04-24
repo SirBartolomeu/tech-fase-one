@@ -40,6 +40,30 @@ public sealed class WorkOrderTests
         Assert.Throws<DomainException>(() => workOrder.Deliver(DateTime.UtcNow));
     }
 
+    [Fact]
+    public void ShouldThrow_WhenCreatedWithoutServicesAndParts()
+    {
+        Assert.Throws<DomainException>(() => new WorkOrder(
+            Guid.NewGuid(),
+            Guid.NewGuid(),
+            Array.Empty<WorkOrderServiceLine>(),
+            Array.Empty<WorkOrderPartLine>(),
+            null,
+            DateTime.UtcNow));
+    }
+
+    [Fact]
+    public void SendBudget_ShouldBeAllowed_FromReceivedStatus()
+    {
+        var createdAt = DateTime.UtcNow;
+        var workOrder = BuildDefaultWorkOrder(createdAt);
+
+        workOrder.SendBudget(createdAt.AddMinutes(1));
+
+        Assert.Equal(WorkOrderStatus.AwaitingApproval, workOrder.Status);
+        Assert.NotNull(workOrder.BudgetSentAtUtc);
+    }
+
     private static WorkOrder BuildDefaultWorkOrder(DateTime? now = null)
     {
         var createdAt = now ?? DateTime.UtcNow;

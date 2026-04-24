@@ -2,6 +2,13 @@
 
 API REST para gestao de oficina mecanica, implementada em `.NET 8` com `C#`, arquitetura em camadas inspirada em DDD, banco `SQLite`, autenticacao JWT, testes automatizados e execucao via Docker Compose.
 
+## Documentacao DDD do desafio
+
+- Documento principal: `docs/documentacao-ddd-tech-challenge.md`
+- Diagramas visuais gerados:
+  - `docs/diagramas/domain-storytelling-oficina-mvp.svg`
+  - `docs/diagramas/event-storming-oficina-mvp.svg`
+
 ## Objetivo do projeto
 
 Entregar um MVP com:
@@ -155,6 +162,32 @@ Cobertura (opcional):
 ```powershell
 dotnet test .\OficinaMvp.sln --collect:"XPlat Code Coverage" -m:1
 ```
+
+Validacao de cobertura minima (80%) nos dominios criticos:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\validate-domain-coverage.ps1 -Minimum 80
+```
+
+## Relatorio de vulnerabilidades (scan de codigo)
+
+Pipeline completo (SCA + SAST + imagem):
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\run-vulnerability-report.ps1
+```
+
+Saidas geradas:
+- `security-report/raw/metadata.json`
+- `security-report/raw/dotnet-vulnerabilities.json`
+- `security-report/raw/semgrep.json`
+- `security-report/raw/docker-scout-cves.sarif.json`
+- `security-report/relatorio-vulnerabilidades.md`
+- `security-report/relatorio-vulnerabilidades.pdf`
+
+Observacao:
+- o pipeline falha de forma explicita se qualquer etapa obrigatoria falhar (incluindo scan de imagem).
+- para o scan de imagem funcionar, o Docker daemon precisa estar acessivel (`docker info` sem erro).
 
 ## Observacoes de desempenho e gargalos
 
