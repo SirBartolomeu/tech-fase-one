@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "CASTonMzCCM=",
+  "dgSpecHash": "gAOYfiPI3Zs=",
   "success": true,
   "projectFilePath": "C:\\Users\\AAMJOF\\Desktop\\FIAP\\Tech-Challenge-1\\oficina-mvp\\tests\\OficinaMvp.Integration.Tests\\OficinaMvp.Integration.Tests.csproj",
   "expectedPackageFiles": [
@@ -155,42 +155,5 @@
     "C:\\Users\\AAMJOF\\.nuget\\packages\\xunit.extensibility.execution\\2.5.3\\xunit.extensibility.execution.2.5.3.nupkg.sha512",
     "C:\\Users\\AAMJOF\\.nuget\\packages\\xunit.runner.visualstudio\\2.5.3\\xunit.runner.visualstudio.2.5.3.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json.",
-      "projectPath": "C:\\Users\\AAMJOF\\Desktop\\FIAP\\Tech-Challenge-1\\oficina-mvp\\tests\\OficinaMvp.Integration.Tests\\OficinaMvp.Integration.Tests.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\Users\\AAMJOF\\Desktop\\FIAP\\Tech-Challenge-1\\oficina-mvp\\tests\\OficinaMvp.Integration.Tests\\OficinaMvp.Integration.Tests.csproj",
-      "targetGraphs": []
-    },
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://scaniaregistry.jfrog.io/artifactory/api/nuget/v3/calvados-nuget-virtual/index.json.",
-      "projectPath": "C:\\Users\\AAMJOF\\Desktop\\FIAP\\Tech-Challenge-1\\oficina-mvp\\tests\\OficinaMvp.Integration.Tests\\OficinaMvp.Integration.Tests.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\Users\\AAMJOF\\Desktop\\FIAP\\Tech-Challenge-1\\oficina-mvp\\tests\\OficinaMvp.Integration.Tests\\OficinaMvp.Integration.Tests.csproj",
-      "targetGraphs": []
-    },
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://scaniaregistry.jfrog.io/artifactory/api/nuget/v3/dm-nuget-virtual/index.json.",
-      "projectPath": "C:\\Users\\AAMJOF\\Desktop\\FIAP\\Tech-Challenge-1\\oficina-mvp\\tests\\OficinaMvp.Integration.Tests\\OficinaMvp.Integration.Tests.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\Users\\AAMJOF\\Desktop\\FIAP\\Tech-Challenge-1\\oficina-mvp\\tests\\OficinaMvp.Integration.Tests\\OficinaMvp.Integration.Tests.csproj",
-      "targetGraphs": []
-    },
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://scaniaregistry.jfrog.io/artifactory/api/nuget/v3/remotediagnostics-nuget-virtual/index.json.",
-      "projectPath": "C:\\Users\\AAMJOF\\Desktop\\FIAP\\Tech-Challenge-1\\oficina-mvp\\tests\\OficinaMvp.Integration.Tests\\OficinaMvp.Integration.Tests.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\Users\\AAMJOF\\Desktop\\FIAP\\Tech-Challenge-1\\oficina-mvp\\tests\\OficinaMvp.Integration.Tests\\OficinaMvp.Integration.Tests.csproj",
-      "targetGraphs": []
-    }
-  ]
+  "logs": []
 }

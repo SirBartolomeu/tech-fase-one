@@ -13,24 +13,14 @@
         "packagesPath": "C:\\Users\\AAMJOF\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\AAMJOF\\Desktop\\FIAP\\Tech-Challenge-1\\oficina-mvp\\src\\OficinaMvp.Api\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\AAMJOF\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\AAMJOF\\Desktop\\FIAP\\Tech-Challenge-1\\oficina-mvp\\security-report\\temp\\NuGet.scan.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://scaniaregistry.jfrog.io/artifactory/api/nuget/v3/calvados-nuget-virtual/index.json": {},
-          "https://scaniaregistry.jfrog.io/artifactory/api/nuget/v3/dm-nuget-virtual/index.json": {},
-          "https://scaniaregistry.jfrog.io/artifactory/api/nuget/v3/remotediagnostics-nuget-virtual/index.json": {},
-          "https://scaniaregistry.jfrog.io/artifactory/api/nuget/v3/telematicservices-nuget-prod-local": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {

@@ -8577,8 +8577,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\AAMJOF\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\AAMJOF\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -8589,24 +8588,14 @@
       "packagesPath": "C:\\Users\\AAMJOF\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\AAMJOF\\Desktop\\FIAP\\Tech-Challenge-1\\oficina-mvp\\tests\\OficinaMvp.Integration.Tests\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\AAMJOF\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\AAMJOF\\Desktop\\FIAP\\Tech-Challenge-1\\oficina-mvp\\security-report\\temp\\NuGet.scan.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {},
-        "https://scaniaregistry.jfrog.io/artifactory/api/nuget/v3/calvados-nuget-virtual/index.json": {},
-        "https://scaniaregistry.jfrog.io/artifactory/api/nuget/v3/dm-nuget-virtual/index.json": {},
-        "https://scaniaregistry.jfrog.io/artifactory/api/nuget/v3/remotediagnostics-nuget-virtual/index.json": {},
-        "https://scaniaregistry.jfrog.io/artifactory/api/nuget/v3/telematicservices-nuget-prod-local": {}
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
@@ -8678,31 +8667,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json."
-    },
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://scaniaregistry.jfrog.io/artifactory/api/nuget/v3/calvados-nuget-virtual/index.json."
-    },
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://scaniaregistry.jfrog.io/artifactory/api/nuget/v3/dm-nuget-virtual/index.json."
-    },
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://scaniaregistry.jfrog.io/artifactory/api/nuget/v3/remotediagnostics-nuget-virtual/index.json."
-    }
-  ]
+  }
 }
