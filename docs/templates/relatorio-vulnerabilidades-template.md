@@ -1,4 +1,4 @@
-# Relatorio de Vulnerabilidades - Tech Challenge Fase 1
+# Relatorio de Vulnerabilidades - Tech Challenge Fase 2
 
 ## 1. Contexto da Execucao
 
@@ -14,7 +14,7 @@
 - `Python`: `{{python_version}}`
 - `Docker`: `{{docker_version}}`
 - `Semgrep`: `{{semgrep_version}}`
-- `Docker Scout`: `{{scout_version}}`
+- `Scanner de imagem`: `{{image_scanner}}`
 
 ## 3. Resumo Executivo
 
