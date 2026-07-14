@@ -1,121 +1,57 @@
-# Roteiro de Video (ate 15 min) - Tech Challenge Fase 2
+﻿# Roteiro curto de video - Tech Challenge Fase 2
 
-## Objetivo do video
+Objetivo: demonstrar, em menos de 10 minutos, o minimo exigido: deploy da aplicacao, CI/CD, consumo das APIs e escalabilidade automatica.
 
-Demonstrar que a Fase 2 evolui a entrega anterior com qualidade de codigo, arquitetura limpa, automacao de infraestrutura, Kubernetes, CI/CD, banco adequado para escala e APIs obrigatorias de OS.
+## Ideia central para explicar
 
-## Estrategia recomendada
+Nao existe cloud nesta entrega. O deploy Kubernetes foi preparado para ambiente local/efemero com `kind`.
 
-- Use Docker Compose como trilha principal se o Docker Desktop estiver ativo.
-- Use execucao local como fallback se o Docker falhar durante a gravacao.
-- Nao rode pipelines longos ao vivo; mostre os arquivos e resultados validados.
-- Mostre Kubernetes/Terraform por manifests, Kustomize, `terraform plan` e workflows; nao precisa aplicar em cluster se o ambiente da gravacao nao estiver pronto.
-- Priorize evidencias objetivas: README, diagramas, Swagger, testes, workflows e relatorio de vulnerabilidades.
+- Localmente: Docker Compose sobe API, PostgreSQL e Mailpit para demonstracao rapida.
+- No CI/CD: o workflow `deploy-kind` cria um cluster Kubernetes `kind` dentro do runner do GitHub Actions, faz build da imagem, carrega a imagem no cluster, aplica os manifests e executa smoke test.
+- Em uma cloud real, a mesma ideia seria trocar o cluster `kind` por AKS/EKS/GKE e trocar secrets efemeros por secrets do ambiente.
 
 ## Pre-check antes de gravar
 
-Executar na raiz do projeto:
+Na raiz do projeto:
 
 ```powershell
-dotnet build .\OficinaMvp.sln --configuration Release --no-restore --maxcpucount:1
-dotnet test .\OficinaMvp.sln --configuration Release --no-build --verbosity minimal --maxcpucount:1
-docker compose config --quiet
-kubectl kustomize .\k8s
-terraform -chdir=infra/terraform init -backend=false
-terraform -chdir=infra/terraform validate
-terraform -chdir=infra/terraform plan
-```
-
-Se Docker estiver disponivel:
-
-```powershell
-docker info
 docker compose down --remove-orphans
 docker compose up -d --build
 Invoke-WebRequest http://localhost:8080/health/ready
 Invoke-WebRequest http://localhost:8080/swagger/v1/swagger.json
 ```
 
-Abas recomendadas:
-
-1. `README.md`
-2. `CHANGELOG.md`
-3. `docs/documentacao-ddd-tech-challenge.md`
-4. `docs/diagramas/arquitetura-fase2-kubernetes.svg`
-5. `docs/diagramas/event-storming-fase2-linha-do-tempo.svg`
-6. `src/OficinaMvp.Api/Program.cs`
-7. `src/OficinaMvp.Application/Services/WorkOrderApplicationService.cs`
-8. `src/OficinaMvp.Domain/Entities/WorkOrder.cs`
-9. `docker-compose.yml`
-10. `k8s/deployment.yaml`, `k8s/hpa.yaml`, `k8s/secret.example.yaml`, `k8s/kustomization.yaml`
-11. `infra/terraform/main.tf`
-12. `.github/workflows/build-test.yml`, `.github/workflows/container.yml`, `.github/workflows/deploy-kind.yml`
-13. Swagger: `http://localhost:8080/swagger` ou `http://localhost:5245/swagger`
-
-## Roteiro minuto a minuto
-
-| Tempo | O que mostrar | Fala objetiva |
-|---|---|---|
-| 00:00-01:00 | `README.md` | Explicar que a Fase 2 evolui a Fase 1 para escalabilidade, automacao, qualidade e Kubernetes. |
-| 01:00-02:30 | `README.md` e `CHANGELOG.md` | Mostrar stack: .NET 8, Clean Architecture, JWT, EF Core, SQLite local/testes, PostgreSQL em Docker/K8s, Docker, Kubernetes, Terraform e GitHub Actions. |
-| 02:30-04:00 | `docs/diagramas/arquitetura-fase2-kubernetes.svg` | Explicar os componentes: API, banco PostgreSQL, ConfigMap, Secret, HPA, probes, PVC, CI/CD e Terraform kind. |
-| 04:00-05:15 | `docs/documentacao-ddd-tech-challenge.md` e Event Storming Fase 2 | Mostrar linguagem ubiqua, contextos, eventos pivotais, politicas e agregado `WorkOrder`. |
-| 05:15-06:30 | `Program.cs`, `WorkOrderApplicationService.cs`, `WorkOrder.cs` | Mostrar DI, JWT, providers SQLite/Postgres, health checks, regras de dominio, transicoes e notificacao. |
-| 06:30-08:00 | `docker-compose.yml` | Explicar API, PostgreSQL, Mailpit, porta `8080`, healthcheck, seed demo e porque PostgreSQL substitui SQLite no ambiente containerizado. |
-| 08:00-09:30 | `k8s/` | Mostrar Deployment non-root, readiness/liveness, resources, HPA CPU/memoria, Secret template e ConfigMap. |
-| 09:30-10:30 | `infra/terraform/main.tf` e `.github/workflows/` | Mostrar provisionamento kind, build/test, Docker build e deploy kind com smoke test. |
-| 10:30-12:30 | Swagger | Gerar JWT, chamar endpoint protegido, criar OS, consultar status, usar decisao externa e tracking publico. |
-| 12:30-13:30 | Terminal e testes | Mostrar `dotnet test` verde e cobertura minima de 80% via `scripts/validate-domain-coverage.ps1`. |
-| 13:30-14:20 | `security-report/relatorio-vulnerabilidades.md` | Explicar SCA NuGet sem achados, Semgrep sem achados e Docker Scout com 1 CVE medium da imagem base sem fix disponivel. |
-| 14:20-15:00 | README | Recapitular requisitos atendidos, collection Swagger/OpenAPI e proximos passos para publicar video/repo. |
-
-## Comandos para demonstracao
-
-### Docker Compose
-
-```powershell
-docker compose up -d --build
-Invoke-WebRequest http://localhost:8080/health/ready
-Invoke-WebRequest http://localhost:8080/swagger/v1/swagger.json
-```
-
-### Testes
+Se quiser mostrar testes no terminal:
 
 ```powershell
 dotnet test .\OficinaMvp.sln --configuration Release --no-build --verbosity minimal --maxcpucount:1
+powershell -ExecutionPolicy Bypass -File .\scripts\validate-domain-coverage.ps1 -Minimum 80
 ```
 
-### Kubernetes renderizado
-
-```powershell
-kubectl kustomize .\k8s
-```
-
-### Terraform
-
-```powershell
-terraform -chdir=infra/terraform init -backend=false
-terraform -chdir=infra/terraform validate
-terraform -chdir=infra/terraform plan
-```
-
-### Encerrar Docker
+Ao terminar:
 
 ```powershell
 docker compose down
 ```
 
-### Fallback local
+## Roteiro sugerido, 6 a 8 minutos
 
-```powershell
-dotnet run --project .\src\OficinaMvp.Api --launch-profile http
-```
+| Tempo | Mostrar | O que falar |
+|---|---|---|
+| 00:00-00:40 | `README.md` | Esta e a evolucao da Fase 1 para Fase 2: Clean Architecture, Docker, Kubernetes local com kind, CI/CD, testes e seguranca. |
+| 00:40-01:40 | GitHub Actions | Mostrar checks `build-test` e `container`. Explicar que `build-test` roda restore, build, testes e cobertura minima; `container` valida build da imagem. |
+| 01:40-02:40 | `.github/workflows/deploy-kind.yml` | Explicar o deploy: Terraform cria cluster kind no runner, Docker build gera a imagem, `kind load` carrega a imagem, `kubectl apply -k ./k8s` publica API e banco, smoke test valida `/health/ready` e Swagger. |
+| 02:40-03:40 | `k8s/deployment.yaml` e `k8s/hpa.yaml` | Mostrar probes, requests/limits, container non-root e HPA de 1 a 5 replicas por CPU/memoria. |
+| 03:40-04:30 | Terminal com Docker Compose | Mostrar `docker compose up -d --build` ja executado e `http://localhost:8080/swagger`. Isso e o deploy local rapido para demonstrar a aplicacao rodando. |
+| 04:30-06:30 | Swagger | Gerar JWT, autorizar, chamar `/api/customers`, `/api/work-orders`, `/api/work-orders/{id}/status` e tracking publico. |
+| 06:30-07:20 | Escalabilidade | Mostrar `k8s/hpa.yaml` e explicar que o HPA escala automaticamente. Se quiser simular sem carga real: `kubectl -n oficina scale deploy/oficina-api --replicas=3` demonstra multiplas replicas; o HPA faria isso automaticamente com carga/metrics-server. |
+| 07:20-08:00 | `security-report/relatorio-vulnerabilidades.md` ou testes | Fechar mostrando cobertura >= 80%, relatorio de vulnerabilidades e checks verdes. |
 
-Swagger local: `http://localhost:5245/swagger`.
+## Sequencia minima de APIs no Swagger
 
-## Payloads para Swagger
+### 1. Autenticacao
 
-### Auth - `POST /api/auth/token`
+`POST /api/auth/token`
 
 ```json
 {
@@ -124,43 +60,26 @@ Swagger local: `http://localhost:5245/swagger`.
 }
 ```
 
-Use o retorno `accessToken` no Swagger em `Authorize` como `Bearer {token}`.
+Copie `accessToken` e use `Authorize` com:
 
-### Customer - `POST /api/customers`
-
-```json
-{
-  "name": "Cliente Video Fase 2",
-  "document": "52998224725",
-  "phone": "(11) 99999-1111",
-  "email": "cliente.video@oficina.local"
-}
+```text
+Bearer TOKEN_AQUI
 ```
 
-### Service - `POST /api/services`
+### 2. Validar API protegida
 
-```json
-{
-  "name": "Revisao Video Fase 2",
-  "description": "Servico para demonstracao da Fase 2",
-  "laborPrice": 180.0,
-  "averageDurationMinutes": 60
-}
-```
+`GET /api/customers`
 
-### Part - `POST /api/parts`
+Fala: rota administrativa exige JWT.
 
-```json
-{
-  "name": "Peca Video Fase 2",
-  "unitPrice": 45.0,
-  "stockQuantity": 15
-}
-```
+### 3. Criar OS usando seed demo
 
-### WorkOrder - `POST /api/work-orders`
+A seed cria cliente `52998224725`, veiculo `BRA2E19`, servicos e pecas. Para facilitar, primeiro consulte:
 
-Substituir `SERVICE_ID` e `PART_ID` pelos GUIDs retornados.
+- `GET /api/services`
+- `GET /api/parts`
+
+Depois use os IDs retornados em `POST /api/work-orders`:
 
 ```json
 {
@@ -173,79 +92,55 @@ Substituir `SERVICE_ID` e `PART_ID` pelos GUIDs retornados.
   },
   "services": [
     {
-      "serviceId": "SERVICE_ID",
+      "serviceId": "COLE_UM_SERVICE_ID",
       "quantity": 1
     }
   ],
   "parts": [
     {
-      "partId": "PART_ID",
-      "quantity": 2
+      "partId": "COLE_UM_PART_ID",
+      "quantity": 1
     }
   ],
-  "notes": "OS criada durante video da Fase 2"
+  "notes": "OS criada no video"
 }
 ```
 
-### Fluxo de status da OS
+### 4. Consultar status
 
-Use o `workOrderId` criado:
+`GET /api/work-orders/{id}/status`
 
-- `GET /api/work-orders/{id}/status`
-- `POST /api/work-orders/{id}/start-diagnosis`
-- `POST /api/work-orders/{id}/send-budget`
-- `POST /api/work-orders/{id}/approve-budget`
-- `POST /api/work-orders/{id}/finalize`
-- `POST /api/work-orders/{id}/deliver`
+Fala: endpoint explicito pedido na Fase 2.
 
-### Decisao externa de orcamento
+### 5. Tracking publico
 
-Endpoint:
+`GET /api/client/work-orders/{id}?document=52998224725`
 
-```http
-POST /api/integrations/work-orders/{id}/budget-decision
-Header: X-Integration-Token: oficina-integration-token-local-123456
+Fala: rota publica nao usa JWT, mas exige documento do cliente.
+
+## Como falar sobre escalabilidade sem complicar
+
+Fala curta:
+
+> A aplicacao esta stateless e usa PostgreSQL fora do container da API. Por isso o Kubernetes pode subir multiplas replicas da API. O `HorizontalPodAutoscaler` esta configurado para variar de 1 a 5 replicas conforme CPU e memoria. Em demo local, eu posso mostrar o manifesto ou escalar manualmente para 3 replicas; em ambiente com metrics-server e carga real, o HPA faria isso automaticamente.
+
+Comandos opcionais se houver cluster kind ativo:
+
+```powershell
+kubectl -n oficina get hpa
+kubectl -n oficina get pods
+kubectl -n oficina scale deploy/oficina-api --replicas=3
+kubectl -n oficina get pods
+kubectl -n oficina scale deploy/oficina-api --replicas=1
 ```
 
-Body de aprovacao:
+## O que nao precisa mostrar
 
-```json
-{
-  "approved": true,
-  "reason": "Cliente aprovou por canal externo"
-}
-```
+- Nao precisa rodar scan de vulnerabilidade ao vivo.
+- Nao precisa aplicar Terraform ao vivo se isso demorar.
+- Nao precisa demonstrar todos os CRUDs.
+- Nao precisa explicar todo DDD; cite apenas que o agregado `WorkOrder` concentra regras de OS.
 
-Body de recusa:
+## Fechamento sugerido
 
-```json
-{
-  "approved": false,
-  "reason": "Cliente pediu revisao do orcamento"
-}
-```
-
-### Tracking publico
-
-```http
-GET /api/client/work-orders/{id}?document=52998224725
-```
-
-## Pontos essenciais para comentar
-
-- A Fase 2 nao reescreveu a solucao; ela evoluiu a base da Fase 1.
-- Clean Architecture separa dominio, casos de uso, infraestrutura e API.
-- SQLite fica para local simples/testes; PostgreSQL e usado em Docker/Kubernetes por ser mais adequado a escala horizontal.
-- JWT protege rotas administrativas; tracking publico segue aberto por OS + documento.
-- `X-Integration-Token` separa integracao externa do login administrativo.
-- `WorkOrder` concentra invariantes de status, historico e transicoes.
-- HPA depende de metrics-server no cluster.
-- Secrets reais nao sao versionados; `secret.example.yaml` e template.
-- O relatorio de vulnerabilidades foi validado com SCA NuGet, Semgrep e Docker Scout; se reexecutar ao vivo, confirme Docker Desktop ativo e login realizado.
-
-## Plano B
-
-- Se Docker falhar, use `dotnet run` e apresente Swagger local em `http://localhost:5245/swagger`.
-- Se nao houver cluster Kubernetes, mostre `kubectl kustomize .\k8s` e explique os manifests.
-- Se nao houver Terraform instalado no ambiente de gravacao, mostre `infra/terraform/main.tf`, `.terraform.lock.hcl` e o workflow `deploy-kind`.
-- Se o tempo apertar, priorize README, arquitetura, Swagger, testes e CI/CD.
+> A entrega atende o pedido com API funcionando, deploy local por Docker Compose, deploy Kubernetes reproduzivel por GitHub Actions com kind, CI/CD com build/test/cobertura, consumo das APIs pelo Swagger e HPA configurado para escalabilidade automatica.
