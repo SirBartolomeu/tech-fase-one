@@ -36,6 +36,11 @@ No console do GitHub Actions, o workflow executa:
   - `GET /api/client/work-orders/{id}?document=52998224725`.
 - Evidencia de escalabilidade:
   - exibe HPA;
+  - instala metrics-server no cluster efemero;
+  - reduz temporariamente o alvo de CPU apenas para demo;
+  - gera carga contra a API;
+  - tenta mostrar o HPA aumentando replicas automaticamente;
+  - se o ambiente nao estabilizar metricas, usa fallback manual;
   - exibe deployment e pods;
   - escala manualmente a API para 3 replicas;
   - volta para 1 replica.
@@ -48,7 +53,7 @@ No console do GitHub Actions, o workflow executa:
 | 00:40-01:30 | GitHub Actions: `build-test` e `container` | `build-test` roda restore, build, testes e cobertura minima. `container` valida o build da imagem Docker. |
 | 01:30-02:20 | `.github/workflows/deploy-kind.yml` | Explicar que este workflow e a trilha principal da demo: cria cluster kind, faz deploy, consome APIs e demonstra escala. |
 | 02:20-03:10 | `k8s/deployment.yaml` e `k8s/hpa.yaml` | Mostrar probes, resources, usuario non-root, Service e HPA de 1 a 5 replicas. |
-| 03:10-05:40 | GitHub Actions: executar/abrir `deploy-kind` | Mostrar logs: `Terraform apply`, `Deploy manifests`, `API smoke test` e `Kubernetes scalability evidence`. |
+| 03:10-05:40 | GitHub Actions: executar/abrir `deploy-kind` | Mostrar logs: `Terraform apply`, `Deploy manifests`, `API smoke test`, `Automatic HPA autoscaling evidence` e `Manual horizontal scaling fallback`. |
 | 05:40-06:40 | Swagger local opcional | Se quiser, abrir `http://localhost:8080/swagger` via Docker Compose e demonstrar JWT visualmente. |
 | 06:40-07:30 | Testes e seguranca | Mostrar cobertura >= 80% e relatorio de vulnerabilidades atualizado. |
 | 07:30-08:00 | Fechamento | Recapitular: deploy funcionando, CI/CD executando, APIs respondendo e Kubernetes/HPA configurado. |
@@ -65,7 +70,8 @@ No GitHub:
    - `Terraform apply`.
    - `Deploy manifests`.
    - `API smoke test`.
-   - `Kubernetes scalability evidence`.
+   - `Automatic HPA autoscaling evidence`.
+   - `Manual horizontal scaling fallback`.
 
 Frase curta para explicar:
 
@@ -124,7 +130,13 @@ Ele executa localmente o equivalente da parte Kubernetes:
 
 ## Fala curta sobre escalabilidade
 
-> A API e stateless e usa PostgreSQL fora do container da aplicacao. Por isso o Kubernetes consegue rodar multiplas replicas da API. O HPA esta configurado para escalar de 1 a 5 replicas por CPU e memoria. No workflow, eu mostro o HPA configurado e simulo a escala para 3 replicas; em um cluster com metrics-server e carga real, essa decisao seria automatica.
+Se o step automatico escalar:
+
+> A API e stateless e usa PostgreSQL fora do container da aplicacao. O workflow instala metrics-server no cluster kind, reduz temporariamente o alvo de CPU apenas para demonstracao e cria carga contra a API. Sem usar `kubectl scale`, o HPA observa as metricas e aumenta automaticamente as replicas. O manifesto real continua conservador, com CPU 70% e memoria 75%.
+
+Se o step automatico nao escalar no tempo limite:
+
+> O HPA esta configurado e o workflow tentou demonstrar autoscaling real com metrics-server e carga. Como o GitHub Actions usa um cluster efemero, as metricas podem nao estabilizar a tempo. Por isso o workflow mantem um fallback manual, que comprova que a API suporta multiplas replicas, mas eu nao vendo esse fallback como autoscaling automatico.
 
 ## O que nao precisa mostrar
 

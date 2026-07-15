@@ -199,7 +199,106 @@ jobs:
           TRACKING_STATUS="$(python3 -c 'import json; print(json.load(open("/tmp/oficina-client-tracking.json"))["status"])')"
           echo "GET /api/client/work-orders/{id}?document=52998224725 OK. status=${TRACKING_STATUS}"
 
-      - name: Kubernetes scalability evidence
+      - name: Automatic HPA autoscaling evidence
+        shell: bash
+        run: |
+          set -uo pipefail
+
+          restore_hpa() {
+            kubectl apply -f ./k8s/hpa.yaml >/dev/null 2>&1 || true
+          }
+
+          cleanup_load() {
+            kubectl -n oficina delete pod api-load-generator --ignore-not-found=true --wait=false >/dev/null 2>&1 || true
+          }
+
+          trap 'cleanup_load; restore_hpa' EXIT
+
+          echo "Installing metrics-server for kind..."
+          if ! kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.7.2/components.yaml; then
+            echo "::warning::metrics-server could not be installed. Keeping workflow green and using manual scaling fallback."
+            exit 0
+          fi
+
+          if ! kubectl -n kube-system patch deployment metrics-server --type=json -p='[{"op":"add","path":"/spec/template/spec/containers/0/args/-","value":"--kubelet-insecure-tls"},{"op":"add","path":"/spec/template/spec/containers/0/args/-","value":"--kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname"},{"op":"add","path":"/spec/template/spec/containers/0/args/-","value":"--metric-resolution=15s"}]'; then
+            echo "::warning::metrics-server patch failed. Keeping workflow green and using manual scaling fallback."
+            exit 0
+          fi
+
+          if ! kubectl -n kube-system rollout status deployment/metrics-server --timeout=180s; then
+            echo "::warning::metrics-server rollout did not finish in time. Keeping workflow green and using manual scaling fallback."
+            kubectl -n kube-system get pods -l k8s-app=metrics-server -o wide || true
+            exit 0
+          fi
+
+          echo "Waiting for metrics API..."
+          METRICS_READY=false
+          for attempt in {1..30}; do
+            if kubectl top pods -n oficina; then
+              METRICS_READY=true
+              break
+            fi
+            sleep 10
+          done
+
+          if [ "${METRICS_READY}" != "true" ]; then
+            echo "::warning::metrics API did not become available in the demo window. Keeping workflow green and using manual scaling fallback."
+            kubectl -n kube-system logs deployment/metrics-server --tail=120 || true
+            exit 0
+          fi
+
+          echo "Current HPA before load:"
+          kubectl -n oficina get hpa oficina-api
+          kubectl -n oficina get deployment oficina-api
+
+          echo "Lowering HPA CPU target only in this ephemeral demo cluster..."
+          if ! kubectl -n oficina patch hpa oficina-api --type=merge -p='{"spec":{"minReplicas":1,"maxReplicas":5,"metrics":[{"type":"Resource","resource":{"name":"cpu","target":{"type":"Utilization","averageUtilization":1}}}]}}'; then
+            echo "::warning::HPA demo patch failed. Keeping workflow green and using manual scaling fallback."
+            exit 0
+          fi
+
+          echo "Starting load generator..."
+          cleanup_load
+          if ! kubectl -n oficina run api-load-generator --image=busybox:1.36 --restart=Never -- /bin/sh -c 'for worker in $(seq 1 40); do while true; do wget -q -O- http://oficina-api/swagger/v1/swagger.json >/dev/null; wget -q -O- http://oficina-api/health/ready >/dev/null; done & done; sleep 240'; then
+            echo "::warning::load generator could not be created. Keeping workflow green and using manual scaling fallback."
+            exit 0
+          fi
+
+          kubectl -n oficina wait --for=condition=Ready pod/api-load-generator --timeout=90s || true
+
+          echo "Waiting for HPA to scale automatically..."
+          SCALED=false
+          for attempt in {1..24}; do
+            kubectl -n oficina get hpa oficina-api || true
+            kubectl -n oficina get deployment oficina-api || true
+            kubectl -n oficina get pods -l app.kubernetes.io/name=oficina-api -o wide || true
+            kubectl top pods -n oficina || true
+
+            READY_REPLICAS="$(kubectl -n oficina get deployment oficina-api -o jsonpath='{.status.readyReplicas}' 2>/dev/null || echo 0)"
+            if [ "${READY_REPLICAS:-0}" -ge 2 ] 2>/dev/null; then
+              SCALED=true
+              break
+            fi
+
+            sleep 15
+          done
+
+          if [ "${SCALED}" = "true" ]; then
+            echo "HPA autoscaling OK: deployment scaled automatically based on metrics."
+          else
+            echo "::warning::HPA did not scale within the demo window. Keeping workflow green and using manual scaling fallback."
+            kubectl -n oficina describe hpa oficina-api || true
+          fi
+
+          cleanup_load
+          restore_hpa
+
+          echo "Final automatic autoscaling evidence:"
+          kubectl -n oficina get hpa oficina-api || true
+          kubectl -n oficina get deployment oficina-api || true
+          kubectl -n oficina get pods -l app.kubernetes.io/name=oficina-api -o wide || true
+
+      - name: Manual horizontal scaling fallback
         shell: bash
         run: |
           set -euxo pipefail
