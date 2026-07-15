@@ -34,15 +34,18 @@ jobs:
       - name: Kind cluster state
         run: |
           kind get clusters
+          kind get nodes --name oficina-local
           docker ps --filter "name=oficina-local"
           kubectl cluster-info
 
       - name: Load image into kind
+        shell: bash
         run: |
-          docker save oficina-mvp-api:local -o /tmp/oficina-mvp-api.tar
-          docker cp /tmp/oficina-mvp-api.tar oficina-local-control-plane:/tmp/oficina-mvp-api.tar
-          docker exec oficina-local-control-plane ctr -n k8s.io images import /tmp/oficina-mvp-api.tar
-          docker exec oficina-local-control-plane ctr -n k8s.io images ls | grep oficina-mvp-api
+          set -euxo pipefail
+          NODE="$(kind get nodes --name oficina-local | head -n 1)"
+          docker image inspect oficina-mvp-api:local
+          docker save oficina-mvp-api:local | docker exec -i "$NODE" ctr -n k8s.io images import -
+          docker exec "$NODE" ctr -n k8s.io images ls | grep oficina-mvp-api
 
       - name: Create Kubernetes secrets
         run: |
