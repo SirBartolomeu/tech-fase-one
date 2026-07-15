@@ -1,18 +1,79 @@
 ﻿# Roteiro curto de video - Tech Challenge Fase 2
 
-Objetivo: demonstrar, em menos de 10 minutos, o minimo exigido: deploy da aplicacao, CI/CD, consumo das APIs e escalabilidade automatica.
+Objetivo: demonstrar em poucos minutos o minimo exigido pela Fase 2: deploy da aplicacao, execucao do CI/CD, consumo das APIs e escalabilidade no Kubernetes.
 
-## Ideia central para explicar
+## Ideia central
 
-Nao existe cloud nesta entrega. O deploy Kubernetes foi preparado para ambiente local/efemero com `kind`.
+A entrega nao usa cloud. O deploy demonstravel acontece em um cluster Kubernetes efemero criado com `kind` dentro do GitHub Actions.
 
-- Localmente: Docker Compose sobe API, PostgreSQL e Mailpit para demonstracao rapida.
-- No CI/CD: o workflow `deploy-kind` cria um cluster Kubernetes `kind` dentro do runner do GitHub Actions, faz build da imagem, carrega a imagem no cluster, aplica os manifests e executa smoke test.
-- Em uma cloud real, a mesma ideia seria trocar o cluster `kind` por AKS/EKS/GKE e trocar secrets efemeros por secrets do ambiente.
+Fluxo principal para o video:
 
-## Pre-check antes de gravar
+- Mostrar os arquivos principais de infraestrutura e CI/CD.
+- Mostrar os checks `build-test` e `container` executados.
+- Disparar manualmente o workflow `deploy-kind`.
+- Usar os logs do `deploy-kind` como evidencia de deploy, consumo das APIs e escalabilidade.
 
-Na raiz do projeto:
+Docker Compose local fica opcional, apenas para abrir o Swagger visualmente se quiser demonstrar JWT com clique.
+
+## O que o workflow `deploy-kind` prova
+
+No console do GitHub Actions, o workflow executa:
+
+- Terraform cria o cluster local `kind` no runner.
+- Docker build gera a imagem `oficina-mvp-api:local`.
+- A imagem e importada no containerd do cluster `kind`.
+- Secrets efemeros de demo sao criados no Kubernetes.
+- `kubectl apply -k ./k8s` publica API, PostgreSQL, Service, PVC e HPA.
+- Rollout aguarda PostgreSQL e API ficarem prontos.
+- Smoke test consome APIs reais:
+  - `GET /health/ready`.
+  - `GET /swagger/v1/swagger.json`.
+  - `POST /api/auth/token`.
+  - `GET /api/customers` com Bearer token.
+  - `GET /api/services` e `GET /api/parts`.
+  - `POST /api/work-orders` usando seed demo.
+  - `GET /api/work-orders/{id}/status`.
+  - `GET /api/client/work-orders/{id}?document=52998224725`.
+- Evidencia de escalabilidade:
+  - exibe HPA;
+  - exibe deployment e pods;
+  - escala manualmente a API para 3 replicas;
+  - volta para 1 replica.
+
+## Roteiro sugerido, 6 a 8 minutos
+
+| Tempo | Mostrar | O que falar |
+|---|---|---|
+| 00:00-00:40 | `README.md` e `CHANGELOG.md` | Esta e a evolucao da Fase 1 para Fase 2: Clean Architecture, Docker, Kubernetes, Terraform, CI/CD, testes e seguranca. |
+| 00:40-01:30 | GitHub Actions: `build-test` e `container` | `build-test` roda restore, build, testes e cobertura minima. `container` valida o build da imagem Docker. |
+| 01:30-02:20 | `.github/workflows/deploy-kind.yml` | Explicar que este workflow e a trilha principal da demo: cria cluster kind, faz deploy, consome APIs e demonstra escala. |
+| 02:20-03:10 | `k8s/deployment.yaml` e `k8s/hpa.yaml` | Mostrar probes, resources, usuario non-root, Service e HPA de 1 a 5 replicas. |
+| 03:10-05:40 | GitHub Actions: executar/abrir `deploy-kind` | Mostrar logs: `Terraform apply`, `Deploy manifests`, `API smoke test` e `Kubernetes scalability evidence`. |
+| 05:40-06:40 | Swagger local opcional | Se quiser, abrir `http://localhost:8080/swagger` via Docker Compose e demonstrar JWT visualmente. |
+| 06:40-07:30 | Testes e seguranca | Mostrar cobertura >= 80% e relatorio de vulnerabilidades atualizado. |
+| 07:30-08:00 | Fechamento | Recapitular: deploy funcionando, CI/CD executando, APIs respondendo e Kubernetes/HPA configurado. |
+
+## Como disparar o deploy no GitHub
+
+No GitHub:
+
+1. Abra `Actions`.
+2. Selecione `deploy-kind`.
+3. Clique em `Run workflow`.
+4. Aguarde concluir.
+5. Abra os logs das etapas:
+   - `Terraform apply`.
+   - `Deploy manifests`.
+   - `API smoke test`.
+   - `Kubernetes scalability evidence`.
+
+Frase curta para explicar:
+
+> Como nao ha cloud no projeto, o deploy acontece em um cluster Kubernetes temporario criado pelo proprio GitHub Actions com kind. Isso prova o fluxo de deploy e validacao sem depender de uma conta AWS, Azure ou GCP.
+
+## Docker Compose local opcional
+
+Use apenas se quiser abrir o Swagger visualmente:
 
 ```powershell
 docker compose down --remove-orphans
@@ -21,37 +82,13 @@ Invoke-WebRequest http://localhost:8080/health/ready
 Invoke-WebRequest http://localhost:8080/swagger/v1/swagger.json
 ```
 
-Se quiser mostrar testes no terminal:
+Swagger:
 
-```powershell
-dotnet test .\OficinaMvp.sln --configuration Release --no-build --verbosity minimal --maxcpucount:1
-powershell -ExecutionPolicy Bypass -File .\scripts\validate-domain-coverage.ps1 -Minimum 80
+```text
+http://localhost:8080/swagger
 ```
 
-Ao terminar:
-
-```powershell
-docker compose down
-```
-
-## Roteiro sugerido, 6 a 8 minutos
-
-| Tempo | Mostrar | O que falar |
-|---|---|---|
-| 00:00-00:40 | `README.md` | Esta e a evolucao da Fase 1 para Fase 2: Clean Architecture, Docker, Kubernetes local com kind, CI/CD, testes e seguranca. |
-| 00:40-01:40 | GitHub Actions | Mostrar checks `build-test` e `container`. Explicar que `build-test` roda restore, build, testes e cobertura minima; `container` valida build da imagem. |
-| 01:40-02:40 | `.github/workflows/deploy-kind.yml` | Explicar o deploy: Terraform cria cluster kind no runner, Docker build gera a imagem, `kind load` carrega a imagem, `kubectl apply -k ./k8s` publica API e banco, smoke test valida `/health/ready` e Swagger. |
-| 02:40-03:40 | `k8s/deployment.yaml` e `k8s/hpa.yaml` | Mostrar probes, requests/limits, container non-root e HPA de 1 a 5 replicas por CPU/memoria. |
-| 03:40-04:30 | Terminal com Docker Compose | Mostrar `docker compose up -d --build` ja executado e `http://localhost:8080/swagger`. Isso e o deploy local rapido para demonstrar a aplicacao rodando. |
-| 04:30-06:30 | Swagger | Gerar JWT, autorizar, chamar `/api/customers`, `/api/work-orders`, `/api/work-orders/{id}/status` e tracking publico. |
-| 06:30-07:20 | Escalabilidade | Mostrar `k8s/hpa.yaml` e explicar que o HPA escala automaticamente. Se quiser simular sem carga real: `kubectl -n oficina scale deploy/oficina-api --replicas=3` demonstra multiplas replicas; o HPA faria isso automaticamente com carga/metrics-server. |
-| 07:20-08:00 | `security-report/relatorio-vulnerabilidades.md` ou testes | Fechar mostrando cobertura >= 80%, relatorio de vulnerabilidades e checks verdes. |
-
-## Sequencia minima de APIs no Swagger
-
-### 1. Autenticacao
-
-`POST /api/auth/token`
+Credenciais JWT de demo:
 
 ```json
 {
@@ -60,87 +97,38 @@ docker compose down
 }
 ```
 
-Copie `accessToken` e use `Authorize` com:
-
-```text
-Bearer TOKEN_AQUI
-```
-
-### 2. Validar API protegida
-
-`GET /api/customers`
-
-Fala: rota administrativa exige JWT.
-
-### 3. Criar OS usando seed demo
-
-A seed cria cliente `52998224725`, veiculo `BRA2E19`, servicos e pecas. Para facilitar, primeiro consulte:
-
-- `GET /api/services`
-- `GET /api/parts`
-
-Depois use os IDs retornados em `POST /api/work-orders`:
-
-```json
-{
-  "customerDocument": "52998224725",
-  "vehicle": {
-    "licensePlate": "BRA2E19",
-    "brand": "Volkswagen",
-    "model": "Gol",
-    "year": 2021
-  },
-  "services": [
-    {
-      "serviceId": "COLE_UM_SERVICE_ID",
-      "quantity": 1
-    }
-  ],
-  "parts": [
-    {
-      "partId": "COLE_UM_PART_ID",
-      "quantity": 1
-    }
-  ],
-  "notes": "OS criada no video"
-}
-```
-
-### 4. Consultar status
-
-`GET /api/work-orders/{id}/status`
-
-Fala: endpoint explicito pedido na Fase 2.
-
-### 5. Tracking publico
-
-`GET /api/client/work-orders/{id}?document=52998224725`
-
-Fala: rota publica nao usa JWT, mas exige documento do cliente.
-
-## Como falar sobre escalabilidade sem complicar
-
-Fala curta:
-
-> A aplicacao esta stateless e usa PostgreSQL fora do container da API. Por isso o Kubernetes pode subir multiplas replicas da API. O `HorizontalPodAutoscaler` esta configurado para variar de 1 a 5 replicas conforme CPU e memoria. Em demo local, eu posso mostrar o manifesto ou escalar manualmente para 3 replicas; em ambiente com metrics-server e carga real, o HPA faria isso automaticamente.
-
-Comandos opcionais se houver cluster kind ativo:
+Ao terminar:
 
 ```powershell
-kubectl -n oficina get hpa
-kubectl -n oficina get pods
-kubectl -n oficina scale deploy/oficina-api --replicas=3
-kubectl -n oficina get pods
-kubectl -n oficina scale deploy/oficina-api --replicas=1
+docker compose down
 ```
+
+## Script local de fallback
+
+Se o GitHub Actions estiver lento ou indisponivel durante a gravacao, use o script local:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\demo-kubernetes-local.ps1
+```
+
+Ele executa localmente o equivalente da parte Kubernetes:
+
+- valida Docker, Terraform, kubectl e kind;
+- cria/usa o cluster `oficina-local`;
+- builda e carrega a imagem;
+- cria secrets locais;
+- aplica os manifests;
+- valida health e Swagger;
+- mostra HPA;
+- escala a API para 3 replicas e volta para 1.
+
+## Fala curta sobre escalabilidade
+
+> A API e stateless e usa PostgreSQL fora do container da aplicacao. Por isso o Kubernetes consegue rodar multiplas replicas da API. O HPA esta configurado para escalar de 1 a 5 replicas por CPU e memoria. No workflow, eu mostro o HPA configurado e simulo a escala para 3 replicas; em um cluster com metrics-server e carga real, essa decisao seria automatica.
 
 ## O que nao precisa mostrar
 
 - Nao precisa rodar scan de vulnerabilidade ao vivo.
-- Nao precisa aplicar Terraform ao vivo se isso demorar.
 - Nao precisa demonstrar todos os CRUDs.
-- Nao precisa explicar todo DDD; cite apenas que o agregado `WorkOrder` concentra regras de OS.
-
-## Fechamento sugerido
-
-> A entrega atende o pedido com API funcionando, deploy local por Docker Compose, deploy Kubernetes reproduzivel por GitHub Actions com kind, CI/CD com build/test/cobertura, consumo das APIs pelo Swagger e HPA configurado para escalabilidade automatica.
+- Nao precisa explicar todo DDD; cite apenas que o agregado `WorkOrder` concentra as regras de OS.
+- Nao precisa usar cloud, porque o deploy Kubernetes efemero no GitHub Actions atende a demonstracao academica da entrega.
